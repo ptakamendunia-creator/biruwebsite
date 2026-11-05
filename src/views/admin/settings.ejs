@@ -15,4 +15,14 @@
   <% }) %>
   <div class="form-actions"><button class="btn primary" type="submit">Simpan pengaturan</button></div>
 </form>
+<% if (me && me.role === 'admin') { %>
+<section class="panel pad">
+  <h2>Email notifikasi form kontak</h2>
+  <p class="muted">Status SMTP: <strong><%= smtpOn ? 'sudah dikonfigurasi' : 'belum dikonfigurasi (pesan tetap tersimpan di Pesan masuk)' %></strong>. Pengaturan SMTP diisi lewat environment di server, bukan di halaman ini.</p>
+  <form method="post" action="/admin/settings/test-mail">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <button class="btn" type="submit">Kirim email uji</button>
+  </form>
+</section>
+<% } %>
 <%- include('_foot') %>

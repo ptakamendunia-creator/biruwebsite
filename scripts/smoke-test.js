@@ -72,6 +72,17 @@ const ok = (cond, name, extra = '') => { if (cond) { passed++; console.log('  ok
   ok(h.get('x-content-type-options') === 'nosniff', 'X-Content-Type-Options');
   ok(!h.get('x-powered-by'), 'tanpa X-Powered-By');
   ok(/frame-ancestors 'none'/.test(h.get('content-security-policy') || ''), 'anti-clickjacking');
+  // Font lokal: tidak ada sumber eksternal, file font tersedia, dan CSP tidak membuka Google Fonts.
+  const csp = h.get('content-security-policy') || '';
+  ok(!/googleapis|gstatic/.test(csp), 'CSP tanpa Google Fonts');
+  const homeHtml = await (await req('/')).text();
+  ok(!/fonts\.(googleapis|gstatic)/.test(homeHtml), 'beranda tidak memuat font eksternal');
+  for (const f of ['plus-jakarta-sans-latin', 'plus-jakarta-sans-latin-ext']) {
+    const fr = await req(`/fonts/${f}.woff2`);
+    ok(fr.status === 200 && (fr.headers.get('content-type') || '').includes('woff2'), `font lokal ${f} tersaji`);
+  }
+  const lg = await req('/img/logo.png');
+  ok(lg.status === 200 && (await lg.arrayBuffer()).byteLength < 40 * 1024, 'logo.png ringan (< 40 KB)');
 
   console.log('\n[Form kontak]');
   const token = (await text('/kontak')).t.match(/name="t" value="([^"]+)"/)[1];

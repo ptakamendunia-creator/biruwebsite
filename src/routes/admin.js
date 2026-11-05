@@ -117,7 +117,7 @@ router.get('/', (req, res) => {
 
 // ---------- Settings ----------
 router.get('/settings', (req, res) => {
-  res.render('admin/settings', { active: 'settings', groups: SETTING_FIELDS, values: res.locals.s });
+  res.render('admin/settings', { active: 'settings', groups: SETTING_FIELDS, values: res.locals.s, smtpOn: !!config.smtp.host });
 });
 router.post('/settings', (req, res) => {
   const upd = db.prepare('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value');
@@ -131,6 +131,15 @@ router.post('/settings', (req, res) => {
   }
   security.audit(req, 'settings.update');
   flashRedirect(req, res, '/admin/settings', 'Pengaturan disimpan.');
+});
+
+router.post('/settings/test-mail', security.requireRole('admin'), async (req, res, next) => {
+  try {
+    const to = config.smtp.to || res.locals.s.contact_email;
+    const r = await require('../mailer').sendTest(to);
+    security.audit(req, 'settings.test-mail', r.ok ? 'ok' : r.error);
+    flashRedirect(req, res, '/admin/settings', r.ok ? `Email uji terkirim ke ${to}. Periksa kotak masuk (dan spam).` : `Email uji gagal: ${r.error}`, r.ok ? 'ok' : 'err');
+  } catch (err) { next(err); }
 });
 
 // ---------- Halaman & SEO ----------

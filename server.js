@@ -25,8 +25,8 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
-      styleSrc: ["'self'", 'https://fonts.googleapis.com'],
-      fontSrc: ['https://fonts.gstatic.com'],
+      styleSrc: ["'self'"],
+      fontSrc: ["'self'"],
       imgSrc: ["'self'", 'data:'],
       connectSrc: ["'self'"],
       frameAncestors: ["'none'"],
@@ -46,6 +46,8 @@ app.use(express.urlencoded({ extended: false, limit: '100kb' }));
 app.use(express.json({ limit: '50kb' }));
 
 // Aset statis: cache panjang untuk file berfingerprint-versi, sedang untuk lainnya.
+// Font tidak pernah berubah pada path yang sama: cache satu tahun, immutable.
+app.use('/fonts', express.static(path.join(__dirname, 'public', 'fonts'), { maxAge: config.isProd ? '365d' : 0, immutable: config.isProd }));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: config.isProd ? '7d' : 0, etag: true }));
 app.use('/uploads', express.static(config.uploadDir, {
   maxAge: config.isProd ? '30d' : 0,
