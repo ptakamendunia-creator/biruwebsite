@@ -4,13 +4,10 @@ data/
 *.log
 .DS_Store
 
-# Versi PHP lama: tidak dipelihara dan tidak dicatat di git
-php/
 
 # Arsip dan artefak build
 *.rar
 *.zip
-php/dist/
 data/*.db-shm
 data/*.db-wal
 deploy/
