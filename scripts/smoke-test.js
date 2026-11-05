@@ -88,6 +88,11 @@ const ok = (cond, name, extra = '') => { if (cond) { passed++; console.log('  ok
   ok(db.prepare('SELECT COUNT(*) c FROM inquiries').get().c === 1, 'pesan masuk database');
   const xs = await post({ name: 'X', email: 'x@example.test', message: 'lintas situs' }, { origin: 'https://evil.example' });
   ok(xs.status === 403, 'POST lintas-origin ditolak');
+  // Regresi: form POST same-origin dapat membawa "Origin: null" (Referrer-Policy ketat). Harus lolos hanya bila Sec-Fetch-Site same-origin.
+  const lf = (h) => fetch(base + '/admin/login', { method: 'POST', redirect: 'manual', headers: { 'content-type': 'application/x-www-form-urlencoded', ...h }, body: 'email=tidak-ada%40example.test&password=salahsalah' });
+  ok((await lf({ origin: 'null', 'sec-fetch-site': 'same-origin' })).status === 401, 'Origin null + same-origin diterima (lanjut ke pengecekan sandi)');
+  ok((await lf({ origin: 'null' })).status === 403, 'Origin null tanpa Sec-Fetch-Site ditolak');
+  ok((await lf({ origin: 'null', 'sec-fetch-site': 'cross-site' })).status === 403, 'Origin null + cross-site ditolak');
   // rate limit: batas 5 per 15 menit
   let limited = false;
   for (let i = 0; i < 8; i++) { const r = await post({ name: 'Spam', email: 's@example.test', message: 'pesan pengulangan ke ' + i, t: token }); if (r.status === 429) limited = true; }

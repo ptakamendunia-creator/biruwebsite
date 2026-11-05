@@ -36,6 +36,8 @@ app.use(helmet({
       ...(config.isProd ? { upgradeInsecureRequests: [] } : {})
     }
   },
+  // same-origin: form POST same-origin tetap membawa Origin asli (no-referrer membuatnya 'null').
+  referrerPolicy: { policy: 'same-origin' },
   crossOriginEmbedderPolicy: false,
   hsts: config.isProd ? { maxAge: 31536000, includeSubDomains: true } : false
 }));

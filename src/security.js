@@ -84,6 +84,9 @@ function sameOrigin(req, res, next) {
   const site = req.get('sec-fetch-site');
   if (site && !['same-origin', 'none'].includes(site)) { console.error('[sameOrigin] ditolak sec-fetch-site=' + site); return res.status(403).json({ ok: false, error: 'Permintaan ditolak.' }); }
   const origin = req.get('origin');
+  // Browser dapat mengirim 'Origin: null' pada form POST same-origin bila Referrer-Policy ketat.
+  // Terima hanya jika Sec-Fetch-Site memastikan same-origin (sudah diperiksa di atas).
+  if (origin === 'null') return site === 'same-origin' ? next() : res.status(403).json({ ok: false, error: 'Permintaan ditolak.' });
   if (origin) {
     let host;
     try { host = new URL(origin).host; } catch { host = ''; }
