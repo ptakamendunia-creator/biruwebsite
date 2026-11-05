@@ -1,0 +1,5 @@
+<figure class="card quote-card reveal">
+  <div class="stars" role="img" aria-label="Penilaian <%= t.rating %> dari 5"><% for (let i = 0; i < t.rating; i++) { %><%- icon('star', 16) %><% } %></div>
+  <blockquote><p>&ldquo;<%= t.quote %>&rdquo;</p></blockquote>
+  <figcaption><b><%= t.name %></b><% if (t.role) { %><span><%= t.role %></span><% } %></figcaption>
+</figure>

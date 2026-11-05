@@ -1,0 +1,52 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Kontak</span>
+    <h1>Mari Bicarakan <em>Kebutuhan Digital Anda.</em></h1>
+    <p class="lead">Mulai dari percakapan yang jelas. Ceritakan kebutuhan Anda dan kami akan membalas secepatnya pada jam kerja.</p>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="container contact-grid">
+    <form class="card form-card reveal" id="contact-form" method="post" action="/api/contact" novalidate>
+      <h2 class="h3">Ceritakan kebutuhan Anda.</h2>
+      <input type="hidden" name="t" value="<%= formToken %>">
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="field"><label for="f-name">Nama lengkap</label><input id="f-name" name="name" type="text" required minlength="2" maxlength="100" autocomplete="name"><small class="err" data-for="name"></small></div>
+      <div class="field-row">
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required maxlength="150" autocomplete="email"><small class="err" data-for="email"></small></div>
+        <div class="field"><label for="f-phone">Telepon / WhatsApp <span class="opt">(opsional)</span></label><input id="f-phone" name="phone" type="tel" maxlength="30" autocomplete="tel"><small class="err" data-for="phone"></small></div>
+      </div>
+      <div class="field"><label for="f-service">Layanan yang diminati</label>
+        <select id="f-service" name="service">
+          <option value="">Belum yakin / konsultasi umum</option>
+          <% services.forEach(function (sv) { %><option value="<%= sv.name %>" <%= selected && selected.indexOf(sv.name) === 0 ? 'selected' : '' %>><%= sv.name %></option><% }) %>
+        </select>
+      </div>
+      <div class="field"><label for="f-msg">Pesan</label><textarea id="f-msg" name="message" rows="5" required minlength="10" maxlength="2000"></textarea><small class="err" data-for="message"></small></div>
+      <button class="btn btn-primary" type="submit">Kirim Pesan <%- icon('arrow', 14) %></button>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      <p class="note-small">Dengan mengirim formulir, Anda menyetujui <a href="/kebijakan-privasi">Kebijakan Privasi</a> kami.</p>
+    </form>
+
+    <aside class="contact-side reveal">
+      <div class="card info-card">
+        <h3>Hubungi kami langsung</h3>
+        <p class="f-line"><%- icon('whatsapp', 18) %> <a href="<%= wa('Halo ' + s.site_name + ', saya ingin konsultasi.') %>" target="_blank" rel="noopener noreferrer">Chat WhatsApp</a></p>
+        <p class="f-line"><%- icon('mail', 18) %> <a href="mailto:<%= s.contact_email %>"><%= s.contact_email %></a></p>
+        <p class="f-line"><%- icon('clock', 18) %> <span><%= s.opening_hours %></span></p>
+      </div>
+      <div class="card info-card">
+        <h3>Lokasi</h3>
+        <p class="f-line"><%- icon('pin', 18) %> <span><%= s.address_primary %></span></p>
+        <% if (s.address_secondary) { %><p class="f-line"><%- icon('pin', 18) %> <span><%= s.address_secondary %></span></p><% } %>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

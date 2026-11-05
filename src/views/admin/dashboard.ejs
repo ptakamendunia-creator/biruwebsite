@@ -1,0 +1,16 @@
+<%- include('_head', { title: 'Ringkasan' }) %>
+<h1>Ringkasan</h1>
+<div class="stats">
+  <% stats.forEach(function (st) { %><a class="stat" href="<%= st[2] %>"><span class="ico-box"><%- icon(st[3], 20) %></span><b><%= st[1] %></b><small><%= st[0] %></small></a><% }) %>
+</div>
+<% if (!smtp) { %><div class="flash warn">SMTP belum dikonfigurasi. Pesan kontak tetap tersimpan di sini, tetapi notifikasi email tidak dikirim. Lihat INSTALLATION.md.</div><% } %>
+<section class="panel">
+  <div class="panel-h"><h2>Pesan terbaru</h2><a href="/admin/inquiries">Lihat semua</a></div>
+  <% if (!latest.length) { %><p class="muted pad">Belum ada pesan.</p><% } else { %>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Nama</th><th>Email</th><th>Layanan</th><th>Status</th><th>Waktu</th></tr></thead>
+    <tbody><% latest.forEach(function (r) { %><tr><td><a href="/admin/inquiries/<%= r.id %>"><%= r.name %></a></td><td><%= r.email %></td><td><%= r.service || '-' %></td><td><span class="tag <%= r.status %>"><%= r.status %></span></td><td><%= r.created_at %></td></tr><% }) %></tbody>
+  </table></div>
+  <% } %>
+</section>
+<%- include('_foot') %>

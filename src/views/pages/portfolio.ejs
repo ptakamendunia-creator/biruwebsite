@@ -1,0 +1,27 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Portofolio</span>
+    <h1>Portofolio Website <em>untuk Berbagai Kebutuhan Bisnis.</em></h1>
+    <p class="lead">Setiap proyek memiliki karakter bisnis dan arah desain yang berbeda. Tampilan di bawah adalah contoh untuk menggambarkan pendekatan kami.</p>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="container">
+    <div class="filters" role="group" aria-label="Filter kategori">
+      <button type="button" class="filter is-active" data-filter="all">Semua</button>
+      <% categories.forEach(function (c) { %><button type="button" class="filter" data-filter="<%= c %>"><%= c %></button><% }) %>
+    </div>
+    <% if (!items.length) { %><p class="empty">Belum ada proyek yang ditampilkan.</p><% } %>
+    <div class="grid grid-3" id="work-grid">
+      <% items.forEach(function (it) { %><%- include('../partials/portfolio-card', { it: it }) %><% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/cta', { ctaTitle: 'Punya kebutuhan serupa? Mari diskusikan.' }) %>
+<%- include('../partials/footer') %>

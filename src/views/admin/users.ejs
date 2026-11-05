@@ -1,0 +1,19 @@
+<%- include('_head', { title: 'Pengguna' }) %>
+<div class="page-h"><h1>Pengguna</h1></div>
+<section class="panel">
+  <div class="table-wrap"><table>
+    <thead><tr><th>Email</th><th>Nama</th><th>Peran</th><th>Dibuat</th><th class="right">Aksi</th></tr></thead>
+    <tbody><% rows.forEach(function (u) { %><tr><td><%= u.email %></td><td><%= u.name %></td><td><span class="tag <%= u.role === 'admin' ? 'ok' : 'off' %>"><%= u.role %></span></td><td><%= u.created_at %></td>
+      <td class="right actions"><% if (u.id !== me.id) { %><form method="post" action="/admin/users/<%= u.id %>/delete" data-confirm="Hapus pengguna ini?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="icon-btn danger" type="submit" aria-label="Hapus"><%- icon('trash', 16) %></button></form><% } %></td></tr><% }) %></tbody>
+  </table></div>
+</section>
+<form class="panel form" method="post" action="/admin/users">
+  <h2>Tambah pengguna</h2>
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <div class="field"><label for="u-email">Email</label><input id="u-email" name="email" type="email" required></div>
+  <div class="field"><label for="u-name">Nama</label><input id="u-name" name="name" maxlength="80"></div>
+  <div class="field"><label for="u-pass">Kata sandi (min. 10 karakter)</label><input id="u-pass" name="password" type="password" minlength="10" required autocomplete="new-password"></div>
+  <div class="field"><label for="u-role">Peran</label><select id="u-role" name="role"><option value="editor">editor (kelola konten)</option><option value="admin">admin (penuh)</option></select></div>
+  <div class="form-actions"><button class="btn primary" type="submit">Tambah</button></div>
+</form>
+<%- include('_foot') %>

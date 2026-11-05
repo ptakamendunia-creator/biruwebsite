@@ -1,0 +1,25 @@
+<header class="site-header" id="top">
+  <div class="container header-row">
+    <a class="brand" href="/">
+      <img src="/img/logo.png" alt="" width="52" height="52">
+      <span class="brand-text"><strong><%= s.site_name.split(' ')[0].toUpperCase() %></strong><small><%= s.site_name.split(' ').slice(1).join(' ').toUpperCase() %></small></span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Navigasi utama">
+      <a href="/" class="<%= path === '/' ? 'is-active' : '' %>">Beranda</a>
+      <a href="/tentang-kami" class="<%= path === '/tentang-kami' ? 'is-active' : '' %>">Tentang Kami</a>
+      <div class="has-sub">
+        <button type="button" class="sub-toggle <%= path.startsWith('/layanan') ? 'is-active' : '' %>" aria-expanded="false" aria-controls="sub-layanan">Layanan <%- icon('chevron', 14) %></button>
+        <div class="sub" id="sub-layanan">
+          <% nav.forEach(function (n) { %><a href="/layanan/<%= n.slug %>"><%= n.name %></a><% }) %>
+        </div>
+      </div>
+      <a href="/portofolio" class="<%= path === '/portofolio' ? 'is-active' : '' %>">Portofolio</a>
+      <a href="/artikel" class="<%= path.startsWith('/artikel') ? 'is-active' : '' %>">Artikel</a>
+      <a href="/kontak" class="<%= path === '/kontak' ? 'is-active' : '' %>">Kontak</a>
+      <a class="btn btn-primary btn-member" href="/member"><%- icon('user', 16) %> Login Member <%- icon('arrow', 14) %></a>
+    </nav>
+    <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="main-nav"><%- icon('menu', 24) %></button>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="konten">

@@ -1,0 +1,7 @@
+<%- include('_head', { title: 'Log aktivitas' }) %>
+<div class="page-h"><h1>Log aktivitas</h1></div>
+<section class="panel"><div class="table-wrap"><table>
+  <thead><tr><th>Waktu (UTC)</th><th>Pengguna</th><th>Aksi</th><th>Detail</th><th>IP</th></tr></thead>
+  <tbody><% rows.forEach(function (a) { %><tr><td><%= a.created_at %></td><td><%= a.email || '-' %></td><td><code><%= a.action %></code></td><td><%= a.detail %></td><td><%= a.ip %></td></tr><% }) %></tbody>
+</table></div></section>
+<%- include('_foot') %>

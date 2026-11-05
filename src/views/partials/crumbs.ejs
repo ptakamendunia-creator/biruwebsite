@@ -1,0 +1,10 @@
+<% if (page.crumbs) { %>
+<nav class="crumbs container" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Beranda</a></li>
+    <% page.crumbs.forEach(function (c, i) { %>
+      <li><% if (i === page.crumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %></li>
+    <% }) %>
+  </ol>
+</nav>
+<% } %>

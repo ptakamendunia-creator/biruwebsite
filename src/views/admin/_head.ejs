@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title><%= typeof title !== 'undefined' ? title + ' · ' : '' %>Admin · <%= s.site_name %></title>
+<link rel="icon" href="/img/favicon.png" type="image/png" sizes="64x64">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/css/admin.css?v=2">
+</head>
+<body class="admin">
+<% if (typeof me !== 'undefined' && me) { %>
+<div class="shell">
+  <aside class="side" id="side">
+    <a class="side-brand" href="/admin"><img src="/img/logo.png" alt="" width="40" height="40"><span>Admin<br><small><%= s.site_name %></small></span></a>
+    <nav aria-label="Menu admin">
+      <a href="/admin" class="<%= active === 'dashboard' ? 'on' : '' %>"><%- icon('dashboard', 18) %> Ringkasan</a>
+      <a href="/admin/inquiries" class="<%= active === 'inquiries' ? 'on' : '' %>"><%- icon('inbox', 18) %> Pesan masuk</a>
+      <p class="side-h">Konten</p>
+      <a href="/admin/pages" class="<%= active === 'pages' ? 'on' : '' %>"><%- icon('globe', 18) %> Halaman &amp; SEO</a>
+      <% Object.keys(resources).forEach(function (k) { %>
+        <a href="/admin/r/<%= k %>" class="<%= active === k ? 'on' : '' %>"><%- icon(resources[k].icon, 18) %> <%= resources[k].title %></a>
+      <% }) %>
+      <a href="/admin/media" class="<%= active === 'media' ? 'on' : '' %>"><%- icon('upload', 18) %> Media</a>
+      <p class="side-h">Sistem</p>
+      <a href="/admin/settings" class="<%= active === 'settings' ? 'on' : '' %>"><%- icon('settings', 18) %> Pengaturan</a>
+      <% if (me.role === 'admin') { %>
+        <a href="/admin/users" class="<%= active === 'users' ? 'on' : '' %>"><%- icon('user', 18) %> Pengguna</a>
+        <a href="/admin/audit" class="<%= active === 'audit' ? 'on' : '' %>"><%- icon('shield', 18) %> Log aktivitas</a>
+      <% } %>
+      <a href="/admin/account" class="<%= active === 'account' ? 'on' : '' %>"><%- icon('settings', 18) %> Akun saya</a>
+    </nav>
+    <div class="side-foot">
+      <a href="/" target="_blank" rel="noopener">Lihat website <%- icon('arrow', 13) %></a>
+      <form method="post" action="/admin/logout"><input type="hidden" name="_csrf" value="<%= csrf %>"><button type="submit"><%- icon('logout', 16) %> Keluar</button></form>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="topbar"><button class="menu-btn" type="button" aria-label="Menu" aria-controls="side" aria-expanded="false"><%- icon('menu', 22) %></button><span><%= me.email %> · <%= me.role %></span></header>
+    <main class="content">
+      <% if (flash) { %><div class="flash <%= flash.type %>" role="status"><%= flash.text %></div><% } %>
+<% } else { %>
+<main class="content-plain">
+<% } %>

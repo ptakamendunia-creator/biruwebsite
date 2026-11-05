@@ -1,0 +1,37 @@
+</main>
+<a class="wa-float" href="<%= wa('Halo ' + s.site_name + ', saya ingin konsultasi pembuatan website.') %>" target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp"><%- icon('whatsapp', 20) %> <span>Chat WhatsApp</span></a>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="/"><img src="/img/logo.png" alt="" width="52" height="52"><span class="brand-text"><strong><%= s.site_name.split(' ')[0].toUpperCase() %></strong><small><%= s.site_name.split(' ').slice(1).join(' ').toUpperCase() %></small></span></a>
+      <p><%= s.tagline %></p>
+    </div>
+    <nav aria-label="Layanan">
+      <h3>Layanan</h3>
+      <% nav.forEach(function (n) { %><a href="/layanan/<%= n.slug %>"><%= n.name %></a><% }) %>
+    </nav>
+    <nav aria-label="Perusahaan">
+      <h3>Perusahaan</h3>
+      <a href="/tentang-kami">Tentang Kami</a>
+      <a href="/portofolio">Portofolio</a>
+      <a href="/testimoni">Testimoni</a>
+      <a href="/artikel">Artikel</a>
+      <a href="/kebijakan-privasi">Kebijakan Privasi</a>
+      <a href="/syarat-ketentuan">Syarat &amp; Ketentuan</a>
+    </nav>
+    <div>
+      <h3>Kantor &amp; Kontak</h3>
+      <p class="f-line"><%- icon('pin', 16) %> <span><%= s.address_primary %></span></p>
+      <% if (s.address_secondary) { %><p class="f-line"><%- icon('pin', 16) %> <span><%= s.address_secondary %></span></p><% } %>
+      <p class="f-line"><%- icon('mail', 16) %> <a href="mailto:<%= s.contact_email %>"><%= s.contact_email %></a></p>
+      <p class="f-line"><%- icon('clock', 16) %> <span><%= s.opening_hours %></span></p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; <%= year %> <%= s.legal_name %>. Hak cipta dilindungi.</span>
+    <span><%= s.footer_note %></span>
+  </div>
+</footer>
+<script src="/js/main.js?v=1" defer></script>
+</body>
+</html>

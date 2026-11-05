@@ -1,0 +1,20 @@
+<%- include('_head', { title: 'Media' }) %>
+<div class="page-h"><h1>Media</h1></div>
+<form class="panel form" method="post" enctype="multipart/form-data" action="/admin/media?_csrf=<%= encodeURIComponent(csrf) %>">
+  <div class="field"><label for="file">Unggah gambar (JPG, PNG, WebP, GIF; maks. 3 MB)</label><input id="file" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required></div>
+  <div class="field"><label for="alt">Teks alternatif (alt)</label><input id="alt" name="alt" maxlength="150"></div>
+  <div class="form-actions"><button class="btn primary" type="submit"><%- icon('upload', 16) %> Unggah</button></div>
+</form>
+<section class="panel">
+  <% if (!rows.length) { %><p class="muted pad">Belum ada file.</p><% } else { %>
+  <div class="media-grid">
+    <% rows.forEach(function (m) { %>
+      <figure class="media-item">
+        <img src="/uploads/<%= m.filename %>" alt="<%= m.alt %>" loading="lazy" width="200" height="140">
+        <figcaption><code>/uploads/<%= m.filename %></code><small><%= Math.round(m.size / 1024) %> KB</small></figcaption>
+        <form method="post" action="/admin/media/<%= m.id %>/delete" data-confirm="Hapus file ini? Halaman yang memakainya akan kehilangan gambar."><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="icon-btn danger" type="submit" aria-label="Hapus"><%- icon('trash', 16) %></button></form>
+      </figure>
+    <% }) %>
+  </div><% } %>
+</section>
+<%- include('_foot') %>

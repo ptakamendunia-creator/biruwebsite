@@ -1,0 +1,15 @@
+<section class="section section-mist" id="faq">
+  <div class="container faq-wrap">
+    <div class="faq-intro reveal">
+      <span class="eyebrow">Pertanyaan Umum</span>
+      <h2>Pertanyaan Umum.</h2>
+      <p>Informasi singkat sebelum memulai website Anda.</p>
+      <a class="btn btn-ghost" href="<%= wa('Halo ' + s.site_name + ', saya ingin bertanya tentang layanan website.') %>" target="_blank" rel="noopener noreferrer">Tanyakan langsung ke tim kami <%- icon('arrow', 14) %></a>
+    </div>
+    <div class="faq-list reveal">
+      <% faqs.forEach(function (f) { %>
+        <details class="faq-item"><summary><%= f.question %><%- icon('plus', 18) %></summary><p><%= f.answer %></p></details>
+      <% }) %>
+    </div>
+  </div>
+</section>

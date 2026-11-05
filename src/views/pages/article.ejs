@@ -1,0 +1,30 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<article class="section">
+  <div class="container prose-wrap">
+    <header class="prose-head">
+      <span class="eyebrow"><%= a.category %></span>
+      <h1><%= a.title %></h1>
+      <p class="lead"><%= a.excerpt %></p>
+      <time datetime="<%= String(a.published_at).slice(0, 10) %>"><%= new Date(a.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
+    </header>
+    <% if (a.cover) { %><img class="prose-cover" src="<%= a.cover %>" alt="<%= a.title %>" width="900" height="480"><% } %>
+    <div class="prose"><%- a.body_html %></div>
+  </div>
+</article>
+
+<% if (more.length) { %>
+<section class="section section-mist">
+  <div class="container">
+    <div class="section-head center"><h2>Lanjutkan Membaca.</h2></div>
+    <div class="grid grid-2">
+      <% more.forEach(function (m) { %><article class="card art-card"><span class="eyebrow"><%= m.label %></span><h3><a href="/artikel/<%= m.slug %>"><%= m.title %></a></h3><a class="text-link" href="/artikel/<%= m.slug %>">Baca artikel <%- icon('arrow-right', 14) %></a></article><% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<%- include('../partials/cta') %>
+<%- include('../partials/footer') %>

@@ -1,0 +1,27 @@
+<%- include('_head', { title: r.title }) %>
+<div class="page-h"><h1><%= r.title %></h1><a class="btn primary" href="/admin/r/<%= resKey %>/new"><%- icon('plus', 16) %> Tambah</a></div>
+<section class="panel">
+  <% if (!rows.length) { %><p class="muted pad">Belum ada data. Klik "Tambah" untuk membuat yang pertama.</p><% } else { %>
+  <div class="table-wrap"><table>
+    <thead><tr><% r.columns.forEach(function (c) { %><th><%= c.label %></th><% }) %><th class="right">Aksi</th></tr></thead>
+    <tbody>
+      <% rows.forEach(function (row) { %>
+        <tr>
+          <% r.columns.forEach(function (c, i) { var v = row[c.key]; %>
+            <td><%
+              if (c.bool) { %><span class="tag <%= v ? 'ok' : 'off' %>"><%= v ? 'Ya' : 'Tidak' %></span><% }
+              else if (c.lookup) { %><%= (lookups[c.key] || {})[String(v)] || v %><% }
+              else if (i === 0) { %><a href="/admin/r/<%= resKey %>/<%= row.id %>"><%= v %></a><% }
+              else { %><%= v %><% } %></td>
+          <% }) %>
+          <td class="right actions">
+            <a class="icon-btn" href="/admin/r/<%= resKey %>/<%= row.id %>" aria-label="Ubah <%= row.title || row.name || row.question || row.id %>"><%- icon('edit', 16) %></a>
+            <form method="post" action="/admin/r/<%= resKey %>/<%= row.id %>/delete" data-confirm="Hapus data ini? Tindakan tidak dapat dibatalkan."><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="icon-btn danger" type="submit" aria-label="Hapus"><%- icon('trash', 16) %></button></form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table></div>
+  <% } %>
+</section>
+<%- include('_foot') %>

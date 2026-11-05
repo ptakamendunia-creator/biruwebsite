@@ -1,0 +1,53 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Website Development · Digital Solution</span>
+    <h1><%= s.site_name %>.<br><em>Membangun Digital dengan Arah yang Jelas.</em></h1>
+    <p class="lead">Kami membantu bisnis, perusahaan, dan lembaga menyampaikan identitasnya melalui website, aplikasi, dan infrastruktur digital yang tertata.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow center reveal">
+    <h2>Kami Membangun Teknologi dengan Memahami Bisnis Terlebih Dahulu.</h2>
+    <p class="lead">Teknologi yang tepat lahir dari pemahaman yang tepat. Karena itu setiap proyek dimulai dari tujuan bisnis, bukan dari daftar fitur.</p>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="container">
+    <div class="section-head center reveal"><h2>Solusi Digital untuk Kebutuhan yang Berbeda.</h2></div>
+    <div class="grid grid-2">
+      <% services.forEach(function (sv) { %>
+        <article class="card svc-card reveal"><span class="ico-box"><%- icon(sv.icon, 22) %></span><h3><a href="/layanan/<%= sv.slug %>"><%= sv.name %></a></h3><p><%= sv.summary %></p><a class="text-link" href="/layanan/<%= sv.slug %>">Selengkapnya <%- icon('arrow-right', 14) %></a></article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white">
+  <div class="container">
+    <div class="section-head center reveal"><h2>Proses yang Jelas dari Pemahaman hingga Peluncuran.</h2></div>
+    <ol class="steps">
+      <% steps.forEach(function (st, i) { %><li class="step reveal"><span class="step-no">0<%= i + 1 %></span><h3><%= st.title %></h3><p><%= st.text %></p></li><% }) %>
+    </ol>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="container">
+    <div class="section-head center reveal"><h2>Standar yang Menjadi Dasar Setiap Pekerjaan.</h2></div>
+    <div class="grid grid-3">
+      <article class="card feat-card reveal"><span class="ico-box"><%- icon('check-circle', 22) %></span><h3>Kejelasan</h3><p>Lingkup, jadwal, dan tanggung jawab disepakati sejak awal agar tidak ada kejutan di tengah jalan.</p></article>
+      <article class="card feat-card reveal"><span class="ico-box"><%- icon('shield', 22) %></span><h3>Kualitas</h3><p>Setiap halaman diuji di berbagai ukuran layar dan diperiksa fungsinya sebelum diluncurkan.</p></article>
+      <article class="card feat-card reveal"><span class="ico-box"><%- icon('headset', 22) %></span><h3>Komunikasi</h3><p>Anda mengetahui perkembangan pekerjaan dan tahu kepada siapa harus bertanya.</p></article>
+    </div>
+    <p class="note-small center">Bagian profil tim belum diisi. Tambahkan informasi tim Anda yang sebenarnya melalui halaman Tentang Kami di admin atau langsung pada template.</p>
+  </div>
+</section>
+
+<%- include('../partials/cta') %>
+<%- include('../partials/footer') %>

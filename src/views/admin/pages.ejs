@@ -1,0 +1,15 @@
+<%- include('_head', { title: 'Halaman & SEO' }) %>
+<div class="page-h"><h1>Halaman &amp; SEO</h1></div>
+<p class="muted">Atur judul, deskripsi, dan gambar berbagi (Open Graph) tiap halaman. Isi dokumen legal juga diedit di sini.</p>
+<section class="panel">
+  <div class="table-wrap"><table>
+    <thead><tr><th>Halaman</th><th>Meta title</th><th>Panjang deskripsi</th><th>Indeks</th><th class="right">Aksi</th></tr></thead>
+    <tbody><% rows.forEach(function (p) { %>
+      <tr><td><a href="/admin/pages/<%= p.slug %>"><%= labels[p.slug] || p.title %></a></td><td><%= p.meta_title %></td>
+      <td><span class="tag <%= p.meta_description.length >= 70 && p.meta_description.length <= 170 ? 'ok' : 'warn' %>"><%= p.meta_description.length %> karakter</span></td>
+      <td><span class="tag <%= p.noindex ? 'off' : 'ok' %>"><%= p.noindex ? 'noindex' : 'indeks' %></span></td>
+      <td class="right actions"><a class="icon-btn" href="/admin/pages/<%= p.slug %>" aria-label="Ubah"><%- icon('edit', 16) %></a></td></tr>
+    <% }) %></tbody>
+  </table></div>
+</section>
+<%- include('_foot') %>

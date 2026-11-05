@@ -1,0 +1,192 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="pill"><i></i> <%= s.legal_name.replace(' (placeholder)', '') %></span>
+      <h1><%= s.hero_title_a %> <em><%= s.hero_title_b %></em></h1>
+      <p><%= s.hero_text %></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/kontak">Diskusikan Kebutuhan Anda <%- icon('arrow', 14) %></a>
+        <a class="btn btn-ghost" href="/portofolio">Lihat Portofolio <%- icon('arrow-right', 14) %></a>
+      </div>
+      <ul class="hero-points">
+        <li><%- icon('check-circle', 16) %> Desain custom</li>
+        <li><%- icon('check-circle', 16) %> Mobile responsive</li>
+        <li><%- icon('check-circle', 16) %> Dukungan setelah online</li>
+      </ul>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="browser">
+        <div class="browser-bar"><i></i><i></i><i></i><span>website-anda.co.id</span></div>
+        <div class="browser-body">
+          <aside class="dash-side">
+            <b class="dash-logo">DASHBOARD</b>
+            <span class="on">Overview</span><span>Website</span><span>Email</span><span>Statistik</span><span>Keamanan</span>
+          </aside>
+          <div class="dash-main">
+            <h4>Website Dashboard</h4>
+            <small>Selamat datang di ruang kerja Anda</small>
+            <div class="dash-stats">
+              <div><small>Domain</small><b>Aktif</b></div>
+              <div><small>SSL</small><b>Aman</b></div>
+              <div><small>Website</small><b>Online</b></div>
+            </div>
+            <div class="dash-preview">
+              <small>Preview website bisnis</small>
+              <div class="dash-hero"><b>Bisnis terbaik dimulai di sini.</b><span class="dash-btn">Hubungi Kami</span><div class="dash-art"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float-card"><span class="float-ico"><%- icon('check', 16) %></span><div><b>Website siap online</b><small>Dengan tampilan yang profesional</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist clients" id="klien">
+  <div class="container center">
+    <span class="eyebrow">Industri yang kami layani</span>
+    <h2 class="reveal">Menjadi bagian dari perjalanan digital berbagai bisnis.</h2>
+    <p class="lead reveal">Setiap kerja sama dimulai dari kebutuhan yang berbeda, dengan perhatian yang sama terhadap kualitas hasil dan komunikasi.</p>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <% ['Perusahaan','UMKM & Bisnis','Lembaga & Organisasi','Kontraktor & Supplier','Konsultan & Profesional','Institusi Pendidikan','Toko Online','Komunitas','Otomotif','Logistik','Fashion','Pertanian'].concat(['Perusahaan','UMKM & Bisnis','Lembaga & Organisasi','Kontraktor & Supplier','Konsultan & Profesional','Institusi Pendidikan','Toko Online','Komunitas','Otomotif','Logistik','Fashion','Pertanian']).forEach(function (t) { %><span class="chip"><%= t %></span><% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tentang">
+  <div class="container about-grid">
+    <div class="about-visual reveal" aria-hidden="true">
+      <div class="about-card">
+        <small><%= s.site_name %></small>
+        <h3>Identitas bisnis.<br>Kehadiran digital.</h3>
+        <p>Website profesional yang membantu pengunjung mengenal bisnis Anda.</p>
+        <div class="about-lines"><i></i><i></i><i></i></div>
+        <span class="about-tag"><%- icon('palette', 16) %> Desain sesuai identitas bisnis</span>
+      </div>
+    </div>
+    <div class="about-copy reveal">
+      <span class="eyebrow">Tentang Kami</span>
+      <h2>Mengenal Bisnis Anda, Membangun Kehadiran Digitalnya.</h2>
+      <p><%= s.legal_name.replace(' (placeholder)', '') %> bergerak di bidang jasa pembuatan website untuk membantu bisnis, perusahaan, dan lembaga menyampaikan identitas serta layanannya secara profesional.</p>
+      <p>Kami memulai pekerjaan dengan memahami siapa yang ingin Anda jangkau, informasi yang perlu disampaikan, dan fungsi yang dibutuhkan. Pemahaman itu menjadi dasar struktur, desain, dan pengembangan website.</p>
+      <p>Melalui proses yang terarah dan komunikasi yang jelas, kami membantu Anda memiliki website yang relevan dengan kebutuhan bisnis.</p>
+      <a class="btn btn-ghost" href="/tentang-kami">Kenali <%= s.site_name.split(' ').slice(0, 2).join(' ') %> <%- icon('arrow', 14) %></a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white" id="layanan">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Layanan Kami</span>
+      <h2>Pilihan Website untuk Kebutuhan Bisnis yang Berbeda.</h2>
+      <p class="lead">Setiap bisnis memiliki tujuan dan cara berkomunikasi yang berbeda. Temukan layanan yang sesuai untuk membangun kehadiran digital Anda.</p>
+    </div>
+    <div class="grid grid-2">
+      <% services.forEach(function (sv) { %>
+        <article class="card svc-card reveal">
+          <span class="ico-box"><%- icon(sv.icon, 22) %></span>
+          <h3><a href="/layanan/<%= sv.slug %>"><%= sv.name %></a></h3>
+          <p><%= sv.summary %></p>
+          <a class="text-link" href="/layanan/<%= sv.slug %>">Konsultasikan Layanan <%- icon('arrow-right', 14) %></a>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist" id="portofolio">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Portofolio Pilihan</span>
+      <h2>Lihat Bagaimana Kami Menerjemahkan Kebutuhan Menjadi Website.</h2>
+      <p class="lead">Jelajahi pilihan proyek. Setiap proyek memiliki karakter, kebutuhan, dan pendekatan yang berbeda sesuai bisnis yang diwakilinya.</p>
+    </div>
+    <div class="grid grid-2">
+      <% portfolio.forEach(function (it) { %><%- include('../partials/portfolio-card', { it: it }) %><% }) %>
+    </div>
+    <div class="center more"><a class="btn btn-ghost" href="/portofolio">Jelajahi semua portofolio <%- icon('arrow-right', 14) %></a></div>
+  </div>
+</section>
+
+<section class="section" id="keunggulan">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Pendekatan Kami</span>
+      <h2>Perhatian pada Detail yang Membentuk Pengalaman Pengunjung.</h2>
+      <p class="lead">Website yang baik membantu pengunjung memahami bisnis Anda. Kami memperhatikan hubungan antara tampilan, isi, dan fungsi sejak awal pengerjaan.</p>
+    </div>
+    <div class="grid grid-3">
+      <% [['palette','Desain yang Mewakili Bisnis','Warna, tipografi, dan elemen visual diarahkan sesuai karakter bisnis serta kesan yang ingin Anda bangun.'],['list','Informasi yang Terstruktur','Profil, layanan, dan kontak disusun dengan urutan yang jelas agar pengunjung mudah memahami bisnis Anda.'],['mobile','Nyaman di Berbagai Perangkat','Tata letak mendukung kenyamanan penggunaan melalui ponsel, tablet, maupun desktop.'],['check-circle','Fungsi dengan Tujuan yang Jelas','Menu, tombol, dan formulir membantu pengunjung menemukan informasi serta menghubungi tim Anda.'],['layers','Lingkup Kerja yang Disepakati','Kebutuhan halaman, fitur, materi, dan tahapan dibahas sejak awal agar pekerjaan memiliki arah yang jelas.'],['clock','Pengembangan yang Terencana','Kebutuhan lanjutan dibahas berdasarkan kondisi website dan prioritas bisnis Anda.']].forEach(function (x) { %>
+        <article class="card feat-card reveal"><span class="ico-box"><%- icon(x[0], 22) %></span><h3><%= x[1] %></h3><p><%= x[2] %></p></article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white" id="proses">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Cara Kerja Kami</span>
+      <h2>Langkah yang Jelas, dari Diskusi hingga Website Aktif.</h2>
+      <p class="lead">Pahami setiap tahap pengerjaan, termasuk materi yang perlu disiapkan dan bagian yang membutuhkan persetujuan Anda.</p>
+    </div>
+    <ol class="steps">
+      <% steps.forEach(function (st, i) { %>
+        <li class="step reveal"><span class="step-no">0<%= i + 1 %></span><h3><%= st.title %></h3><p><%= st.text %></p></li>
+      <% }) %>
+    </ol>
+  </div>
+</section>
+
+<section class="section section-mist" id="dukungan">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Layanan After Sales</span>
+      <h2>Website Aktif, Dukungan Kami Tetap Hadir.</h2>
+      <p class="lead">Kelola website secara mandiri dengan akses layanan yang terpusat, bantuan teknis, konsultasi, dan backup berkala. Cakupan pastinya mengikuti paket yang disepakati.</p>
+    </div>
+    <div class="grid grid-3">
+      <% [['user','Member Area','Akses layanan hosting, domain, dan email bisnis dari satu tempat.'],['headset','Bantuan Teknis','Bantuan pemeriksaan dan penanganan kendala teknis sesuai cakupan layanan.'],['book','Konsultasi','Diskusikan pertanyaan, ide, dan kebutuhan website bersama tim kami.'],['database','Backup Berkala','Data website dicadangkan berkala untuk membantu proses pemulihan.'],['layers','Pengembangan Lanjutan','Butuh halaman, fitur, atau integrasi baru? Direncanakan sebagai pekerjaan terpisah.'],['book','Panduan Pengelolaan','Panduan mengelola teks, gambar, dan konten secara mandiri.']].forEach(function (x) { %>
+        <article class="card feat-card reveal"><span class="ico-box"><%- icon(x[0], 22) %></span><h3><%= x[1] %></h3><p><%= x[2] %></p></article>
+      <% }) %>
+    </div>
+    <div class="note-bar reveal"><%- icon('shield', 20) %> <p>Layanan after sales tidak mencakup revisi atau pembaruan konten setelah website online. Pengembangan tambahan dikerjakan berdasarkan kesepakatan terpisah.</p> <a class="btn btn-primary" href="<%= wa('Halo tim after sales ' + s.site_name + ', saya memerlukan bantuan terkait layanan website saya.') %>" target="_blank" rel="noopener noreferrer">Hubungi Tim After Sales</a></div>
+  </div>
+</section>
+
+<% if (testimonials.length) { %>
+<section class="section section-white" id="testimoni">
+  <div class="container">
+    <div class="section-head center reveal"><span class="eyebrow">Testimoni</span><h2>Kata Mereka yang Sudah Bekerja Sama.</h2></div>
+    <div class="grid grid-3">
+      <% testimonials.forEach(function (t) { %><%- include('../partials/testimonial-card', { t: t }) %><% }) %>
+    </div>
+    <div class="center more"><a class="btn btn-ghost" href="/testimoni">Lihat semua testimoni <%- icon('arrow-right', 14) %></a></div>
+  </div>
+</section>
+<% } %>
+
+<section class="section section-white" id="artikel">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Artikel &amp; Panduan</span>
+      <h2>Bekal untuk Mengambil Keputusan Digital yang Lebih Tepat.</h2>
+      <p class="lead">Panduan singkat untuk merencanakan, menyiapkan, dan mengelola website bisnis Anda.</p>
+    </div>
+    <div class="grid grid-3">
+      <% articles.forEach(function (a) { %>
+        <article class="card art-card reveal"><span class="eyebrow"><%= a.label || a.category %></span><h3><a href="/artikel/<%= a.slug %>"><%= a.title %></a></h3><p><%= a.excerpt %></p><a class="text-link" href="/artikel/<%= a.slug %>">Baca artikel <%- icon('arrow-right', 14) %></a></article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/faq') %>
+<%- include('../partials/cta') %>
+<%- include('../partials/footer') %>

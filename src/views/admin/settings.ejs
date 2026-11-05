@@ -1,0 +1,18 @@
+<%- include('_head', { title: 'Pengaturan' }) %>
+<div class="page-h"><h1>Pengaturan situs</h1></div>
+<form class="form" method="post" action="/admin/settings">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <% groups.forEach(function (g) { %>
+    <fieldset class="panel"><legend><%= g.group %></legend>
+      <% g.fields.forEach(function (f) { %>
+        <div class="field">
+          <label for="s-<%= f.name %>"><%= f.label %></label>
+          <% if (f.type === 'textarea') { %><textarea id="s-<%= f.name %>" name="<%= f.name %>" rows="3"><%= values[f.name] || '' %></textarea>
+          <% } else { %><input id="s-<%= f.name %>" name="<%= f.name %>" type="<%= f.type === 'email' ? 'email' : 'text' %>" value="<%= values[f.name] || '' %>" maxlength="<%= f.max || 300 %>"><% } %>
+        </div>
+      <% }) %>
+    </fieldset>
+  <% }) %>
+  <div class="form-actions"><button class="btn primary" type="submit">Simpan pengaturan</button></div>
+</form>
+<%- include('_foot') %>

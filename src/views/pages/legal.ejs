@@ -1,0 +1,18 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Dokumen Legal</span>
+    <h1><%= doc.title %></h1>
+    <p class="lead">Terakhir diperbarui: <%= new Date(doc.updated_at.replace(' ', 'T') + 'Z').toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="container prose-wrap"><div class="card prose-card"><div class="prose"><%- doc.body_html %></div></div></div>
+</section>
+
+<%- include('../partials/cta', { ctaTitle: 'Punya pertanyaan?' }) %>
+<%- include('../partials/footer') %>

@@ -1,0 +1,11 @@
+<%- include('_head', { title: 'Pesan masuk' }) %>
+<div class="page-h"><h1>Pesan masuk</h1></div>
+<div class="tabs"><a class="<%= !status ? 'on' : '' %>" href="/admin/inquiries">Semua</a><% ['baru','dibaca','selesai','spam'].forEach(function (st) { %><a class="<%= status === st ? 'on' : '' %>" href="/admin/inquiries?status=<%= st %>"><%= st %></a><% }) %></div>
+<section class="panel">
+  <% if (!rows.length) { %><p class="muted pad">Tidak ada pesan.</p><% } else { %>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Nama</th><th>Email</th><th>Layanan</th><th>Status</th><th>Email terkirim</th><th>Waktu</th></tr></thead>
+    <tbody><% rows.forEach(function (r) { %><tr><td><a href="/admin/inquiries/<%= r.id %>"><%= r.name %></a></td><td><%= r.email %></td><td><%= r.service || '-' %></td><td><span class="tag <%= r.status %>"><%= r.status %></span></td><td><%= r.notified ? 'Ya' : 'Tidak' %></td><td><%= r.created_at %></td></tr><% }) %></tbody>
+  </table></div><% } %>
+</section>
+<%- include('_foot') %>

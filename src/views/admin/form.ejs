@@ -1,0 +1,37 @@
+<%- include('_head', { title: (isNew ? 'Tambah ' : 'Ubah ') + r.title }) %>
+<div class="page-h"><h1><%= isNew ? 'Tambah' : 'Ubah' %> <%= r.title %></h1><a class="btn" href="/admin/r/<%= resKey %>">&larr; Kembali</a></div>
+<% if (Object.keys(errors).length) { %><div class="flash err" role="alert">Periksa kembali isian Anda.</div><% } %>
+<form class="panel form" method="post" action="/admin/r/<%= resKey %>/<%= isNew ? 'new' : row.id %>">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <% r.fields.forEach(function (f) { var v = row[f.name] == null ? '' : row[f.name]; %>
+    <% if (f.type === 'checkbox') { %>
+      <div class="field check"><label><input type="checkbox" name="<%= f.name %>" value="1" <%= v ? 'checked' : '' %>> <%= f.label %></label></div>
+    <% } else { %>
+      <div class="field <%= errors[f.name] ? 'has-err' : '' %>">
+        <label for="f-<%= f.name %>"><%= f.label %><% if (f.required) { %> <span class="req">*</span><% } %></label>
+        <% if (f.type === 'textarea' || f.type === 'html') { %>
+          <textarea id="f-<%= f.name %>" name="<%= f.name %>" rows="<%= f.type === 'html' ? 16 : 4 %>" <%= f.type === 'html' ? 'class=mono' : '' %>><%= v %></textarea>
+        <% } else if (f.type === 'select') { %>
+          <select id="f-<%= f.name %>" name="<%= f.name %>">
+            <option value="">- pilih -</option>
+            <% opts(f).forEach(function (o) { var ov = o.value != null ? o.value : o; var ol = o.label || o; %>
+              <option value="<%= ov %>" <%= String(ov) === String(v) ? 'selected' : '' %>><%= ol %></option>
+            <% }) %>
+          </select>
+        <% } else if (f.type === 'image') { %>
+          <select id="f-<%= f.name %>" name="<%= f.name %>">
+            <option value="">- tanpa gambar -</option>
+            <% media.forEach(function (m) { %><option value="/uploads/<%= m.filename %>" <%= v === '/uploads/' + m.filename ? 'selected' : '' %>><%= m.filename %></option><% }) %>
+          </select>
+          <small class="help">Unggah gambar lebih dulu di menu <a href="/admin/media">Media</a>.</small>
+        <% } else { %>
+          <input id="f-<%= f.name %>" name="<%= f.name %>" type="<%= f.type === 'number' ? 'number' : (f.type === 'date' ? 'date' : 'text') %>" value="<%= v %>" <%= f.max && f.type !== 'number' ? 'maxlength=' + f.max : '' %> <%= f.min != null ? 'min=' + f.min : '' %> <%= f.type === 'number' && f.max != null ? 'max=' + f.max : '' %>>
+        <% } %>
+        <% if (f.help) { %><small class="help"><%= f.help %></small><% } %>
+        <% if (errors[f.name]) { %><small class="err"><%= errors[f.name] %></small><% } %>
+      </div>
+    <% } %>
+  <% }) %>
+  <div class="form-actions"><button class="btn primary" type="submit">Simpan</button><a class="btn" href="/admin/r/<%= resKey %>">Batal</a></div>
+</form>
+<%- include('_foot') %>

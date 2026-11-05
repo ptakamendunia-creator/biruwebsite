@@ -1,0 +1,23 @@
+<%- include('_head', { title: 'Pesan' }) %>
+<div class="page-h"><h1>Pesan dari <%= row.name %></h1><a class="btn" href="/admin/inquiries">&larr; Kembali</a></div>
+<section class="panel pad">
+  <dl class="kv">
+    <dt>Nama</dt><dd><%= row.name %></dd>
+    <dt>Email</dt><dd><a href="mailto:<%= row.email %>"><%= row.email %></a></dd>
+    <dt>Telepon</dt><dd><%= row.phone || '-' %></dd>
+    <dt>Layanan</dt><dd><%= row.service || '-' %></dd>
+    <dt>Waktu</dt><dd><%= row.created_at %> UTC</dd>
+    <dt>IP</dt><dd><%= row.ip || '-' %></dd>
+    <dt>Pesan</dt><dd class="pre"><%= row.message %></dd>
+  </dl>
+  <form class="inline" method="post" action="/admin/inquiries/<%= row.id %>/status">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <label for="st">Status</label>
+    <select id="st" name="status"><% ['baru','dibaca','selesai','spam'].forEach(function (st) { %><option <%= row.status === st ? 'selected' : '' %>><%= st %></option><% }) %></select>
+    <button class="btn primary" type="submit">Perbarui</button>
+  </form>
+  <% if (me.role === 'admin') { %>
+  <form method="post" action="/admin/inquiries/<%= row.id %>/delete" data-confirm="Hapus pesan ini permanen?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn danger" type="submit"><%- icon('trash', 16) %> Hapus pesan</button></form>
+  <% } %>
+</section>
+<%- include('_foot') %>

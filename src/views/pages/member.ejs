@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<section class="page-hero">
+  <div class="container center">
+    <span class="eyebrow">Member Area</span>
+    <h1>Member Area <em>Segera Hadir.</em></h1>
+    <p class="lead">Satu akses untuk mengelola hosting, domain, dan email bisnis Anda sedang kami persiapkan.</p>
+    <% if (s.member_launch) { %><p class="pill pill-center"><i></i> Jadwal: <%= s.member_launch %></p><% } %>
+    <div class="hero-actions center-actions">
+      <a class="btn btn-primary" href="/kontak">Tanya Tim Kami <%- icon('arrow', 14) %></a>
+      <a class="btn btn-ghost" href="/">Kembali ke Beranda</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="container">
+    <div class="section-head center"><h2>Satu akses untuk kebutuhan website Anda.</h2></div>
+    <div class="grid grid-3">
+      <article class="card feat-card"><span class="ico-box"><%- icon('server', 22) %></span><h3>Hosting</h3><p>Pantau status dan layanan hosting website.</p></article>
+      <article class="card feat-card"><span class="ico-box"><%- icon('globe', 22) %></span><h3>Domain</h3><p>Lihat dan kelola domain yang terhubung.</p></article>
+      <article class="card feat-card"><span class="ico-box"><%- icon('mail', 22) %></span><h3>Email Bisnis</h3><p>Atur akun email dengan nama domain Anda.</p></article>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

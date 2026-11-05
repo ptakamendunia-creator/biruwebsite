@@ -1,0 +1,16 @@
+<%- include('_head', { title: 'Ubah halaman' }) %>
+<div class="page-h"><h1>Ubah halaman: <%= row.title %></h1><a class="btn" href="/admin/pages">&larr; Kembali</a></div>
+<form class="panel form" method="post" action="/admin/pages/<%= row.slug %>">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <div class="field"><label for="title">Nama halaman</label><input id="title" name="title" value="<%= row.title %>" maxlength="120"></div>
+  <div class="field"><label for="meta_title">Meta title</label><input id="meta_title" name="meta_title" value="<%= row.meta_title %>" maxlength="70"><small class="help">Idealnya 50-60 karakter.</small></div>
+  <div class="field"><label for="meta_description">Meta description</label><textarea id="meta_description" name="meta_description" rows="3" maxlength="170"><%= row.meta_description %></textarea><small class="help">Idealnya 120-160 karakter.</small></div>
+  <div class="field"><label for="og_image">Gambar berbagi (Open Graph)</label>
+    <select id="og_image" name="og_image"><option value="">Gunakan gambar bawaan</option>
+      <% media.forEach(function (m) { %><option value="/uploads/<%= m.filename %>" <%= row.og_image === '/uploads/' + m.filename ? 'selected' : '' %>><%= m.filename %></option><% }) %></select>
+    <small class="help">Ukuran ideal 1200x630 (JPG/PNG).</small></div>
+  <% if (legal) { %><div class="field"><label for="body_html">Isi dokumen (HTML)</label><textarea id="body_html" name="body_html" rows="20" class="mono"><%= row.body_html %></textarea><small class="help">Gunakan h2, h3, p, ul, ol, a, strong.</small></div><% } %>
+  <div class="field check"><label><input type="checkbox" name="noindex" value="1" <%= row.noindex ? 'checked' : '' %>> Sembunyikan dari mesin pencari (noindex)</label></div>
+  <div class="form-actions"><button class="btn primary" type="submit">Simpan</button><a class="btn" href="/admin/pages">Batal</a></div>
+</form>
+<%- include('_foot') %>

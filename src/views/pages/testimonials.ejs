@@ -1,0 +1,29 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Testimoni</span>
+    <h1>Pengalaman <em>Klien Kami.</em></h1>
+    <p class="lead">Cerita dari mereka yang sudah bekerja sama dengan kami dalam membangun website dan sistem digital.</p>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="container">
+    <% if (testimonials.length) { %>
+      <div class="grid grid-3"><% testimonials.forEach(function (t) { %><%- include('../partials/testimonial-card', { t: t }) %><% }) %></div>
+    <% } else { %>
+      <div class="empty-state card center">
+        <span class="ico-box"><%- icon('star', 22) %></span>
+        <h2>Testimoni akan segera hadir.</h2>
+        <p>Kami hanya menayangkan testimoni asli dari klien. Halaman ini akan terisi setelah ada testimoni yang disetujui.</p>
+        <a class="btn btn-primary" href="/kontak">Mulai Konsultasi <%- icon('arrow', 14) %></a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/cta') %>
+<%- include('../partials/footer') %>

@@ -1,0 +1,116 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/crumbs') %>
+
+<section class="page-hero">
+  <div class="container hero-split">
+    <div>
+      <span class="eyebrow"><%= svc.name %></span>
+      <h1><%= svc.hero_title %></h1>
+      <p class="lead"><%= svc.hero_text %></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/kontak?layanan=<%= encodeURIComponent(svc.name) %>">Konsultasikan Layanan <%- icon('arrow', 14) %></a>
+        <a class="btn btn-ghost" href="<%= wa('Halo ' + s.site_name + ', saya ingin konsultasi tentang ' + svc.name + '.') %>" target="_blank" rel="noopener noreferrer"><%- icon('whatsapp', 16) %> Chat WhatsApp</a>
+      </div>
+      <ul class="hero-points"><li><%- icon('check-circle', 16) %> Desain profesional</li><li><%- icon('check-circle', 16) %> Responsif</li><li><%- icon('check-circle', 16) %> Dukungan teknis</li></ul>
+    </div>
+    <div class="hero-visual svc-visual" aria-hidden="true">
+      <div class="browser">
+        <div class="browser-bar"><i></i><i></i><i></i></div>
+        <div class="svc-mock">
+          <div>
+            <small><%= svc.name %></small>
+            <b><%= features.slice(0, 3).map(function (f) { return f.title; }).join('. ') %>.</b>
+            <span class="dash-btn">Konsultasi</span>
+          </div>
+          <span class="ico-box ico-xl"><%- icon(svc.icon, 54) %></span>
+        </div>
+      </div>
+      <div class="float-card"><span class="float-ico"><%- icon('check', 16) %></span><div><b>Siap untuk bisnis Anda</b><small>Responsif, aman, dan terstruktur</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist clients" id="klien">
+  <div class="container center"><span class="eyebrow">Industri yang kami layani</span><h2>Menjadi bagian dari perjalanan digital berbagai bisnis.</h2></div>
+  <div class="marquee" aria-hidden="true"><div class="marquee-track">
+    <% ['Perusahaan','UMKM & Bisnis','Lembaga & Organisasi','Kontraktor & Supplier','Konsultan & Profesional','Institusi Pendidikan','Toko Online','Komunitas'].concat(['Perusahaan','UMKM & Bisnis','Lembaga & Organisasi','Kontraktor & Supplier','Konsultan & Profesional','Institusi Pendidikan','Toko Online','Komunitas']).forEach(function (t) { %><span class="chip"><%= t %></span><% }) %>
+  </div></div>
+</section>
+
+<section class="section">
+  <div class="container narrow center reveal">
+    <h2><%= svc.intro_title %></h2>
+    <p class="lead"><%= svc.intro_text %></p>
+  </div>
+</section>
+
+<% if (audience.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal"><h2>Dibangun untuk kebutuhan yang berbeda.</h2></div>
+    <div class="grid grid-3">
+      <% audience.forEach(function (x) { %><article class="card feat-card reveal"><span class="ico-box"><%- icon(svc.icon, 22) %></span><h3><%= x.title %></h3><p><%= x.text %></p></article><% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<% if (features.length) { %>
+<section class="section section-white">
+  <div class="container">
+    <div class="section-head center reveal"><h2>Fitur dan kemampuan utama.</h2></div>
+    <div class="grid grid-3">
+      <% features.forEach(function (x) { %><article class="card feat-card reveal"><span class="ico-box"><%- icon('check-circle', 22) %></span><h3><%= x.title %></h3><p><%= x.text %></p></article><% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<% if (steps.length) { %>
+<section class="section section-mist">
+  <div class="container">
+    <div class="section-head center reveal"><h2>Alur pengerjaan yang jelas.</h2></div>
+    <ol class="steps">
+      <% steps.forEach(function (st, i) { %><li class="step reveal"><span class="step-no">0<%= i + 1 %></span><h3><%= st.title %></h3><p><%= st.text %></p></li><% }) %>
+    </ol>
+  </div>
+</section>
+<% } %>
+
+<% if (packages.length) { %>
+<section class="section section-white" id="harga">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Paket</span>
+      <h2>Tiga pilihan untuk skala kebutuhan yang berbeda.</h2>
+      <p class="lead">Rincian dan harga disesuaikan setelah konsultasi agar sesuai lingkup pekerjaan.</p>
+    </div>
+    <div class="grid grid-3 pricing">
+      <% packages.forEach(function (p) { %>
+        <article class="card price-card <%= p.highlight ? 'is-featured' : '' %> reveal">
+          <% if (p.highlight) { %><span class="badge">Paling dipilih</span><% } %>
+          <h3><%= p.name %></h3>
+          <p class="price"><%= p.price_label %></p>
+          <p class="muted"><%= p.description %></p>
+          <ul class="checks"><% p.list.forEach(function (li) { %><li><%- icon('check', 16) %> <%= li %></li><% }) %></ul>
+          <a class="btn <%= p.highlight ? 'btn-primary' : 'btn-ghost' %>" href="/kontak?layanan=<%= encodeURIComponent(svc.name + ' - ' + p.name) %>">Pilih <%= p.name %></a>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="section section-mist">
+  <div class="container">
+    <div class="section-head center reveal"><h2>Contoh pendekatan untuk kebutuhan serupa.</h2></div>
+    <div class="grid grid-3">
+      <% portfolio.forEach(function (it) { %><%- include('../partials/portfolio-card', { it: it }) %><% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/faq') %>
+<%- include('../partials/cta', { ctaTitle: 'Siap membicarakan ' + svc.name + '?' }) %>
+<%- include('../partials/footer') %>

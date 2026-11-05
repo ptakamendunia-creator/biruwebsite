@@ -1,0 +1,30 @@
+{
+  "name": "biru-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website corporate biru dengan backend, database SQLite, dan admin dashboard.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "create-admin": "node scripts/create-admin.js",
+    "backup": "node scripts/backup.js",
+    "test": "node scripts/smoke-test.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "ejs": "^7.0.2",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "multer": "^2.5.0",
+    "nodemailer": "^10.3.1",
+    "sanitize-html": "^2.14.0"
+  }
+}
