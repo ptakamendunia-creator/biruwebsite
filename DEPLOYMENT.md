@@ -1,8 +1,8 @@
 # Deployment
 
-Aplikasi adalah satu proses Node.js dengan database SQLite berbasis berkas. Platform yang sudah dipakai: **hosting cPanel Gapurahoster (menu Node.js)**. Alternatif: VPS atau hosting lain yang mendukung Node 22.13+.
+Aplikasi adalah satu proses Node.js dengan database SQLite berbasis berkas. Platform yang sudah dipakai: **hosting DirectAdmin Gapurahoster (plugin Node.js)**. Alternatif: VPS atau hosting lain yang mendukung Node 22.13+.
 
-## Gapurahoster (cPanel Node.js) — yang sedang dipakai
+## Gapurahoster (DirectAdmin > Node.js) — yang sedang dipakai
 1. **Node.js > Create Application**: Node 24, mode `production`, Application root `domains/biruwebsite.my.id/app` (satu folder dengan `public_html` domain), URL `biruwebsite.my.id` (kolom path kosong), startup file `server.js`.
 2. **Environment variables** (satu variabel per baris; `NODE_ENV` otomatis dari mode):
    | Name | Value |
@@ -21,7 +21,7 @@ Aplikasi adalah satu proses Node.js dengan database SQLite berbasis berkas. Plat
 Setelah disiapkan satu kali, revisi cukup: **buat branch -> Pull Request -> tes CI lulus -> Merge**. Workflow `.github/workflows/deploy.yml` lalu mengunggah file ke hosting dan me-restart aplikasi.
 
 Penyiapan satu kali:
-1. Di cPanel > **FTP Accounts**, buat akun FTP khusus yang terbatas pada folder aplikasi (`domains/biruwebsite.my.id/app`).
+1. Di DirectAdmin > **FTP Management**, buat akun FTP khusus yang terbatas pada folder aplikasi (`domains/biruwebsite.my.id/app`).
 2. Di GitHub: **Settings > Environments > New environment** bernama `production` (opsional: aktifkan *Required reviewers* sebagai persetujuan akhir). Tambahkan *secrets* di environment itu:
    | Secret | Isi |
    |---|---|
@@ -100,3 +100,6 @@ Server menolak start di produksi tanpa `SESSION_SECRET`.
 
 ## Skala
 SQLite dengan mode WAL melayani trafik situs company profile dengan nyaman. Untuk lebih dari satu instance atau beban tulis tinggi, pindahkan ke PostgreSQL/MySQL: skema di `src/db.js` portabel, dan semua query terpusat pada `src/routes/*.js`.
+
+## Troubleshooting: situs 403/404 dari LiteSpeed
+Buka DirectAdmin > **Node.js**. Bila status aplikasi `stopped`, klik tombol Start (kasus 16 Nov 2026). Bila `stderr.log` berisi `fork: Resource temporarily unavailable`, batas proses akun hosting tercapai (akun dipakai bersama beberapa situs): hentikan proses lain atau minta Gapurahoster menaikkan limit.
