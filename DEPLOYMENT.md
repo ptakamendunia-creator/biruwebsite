@@ -18,23 +18,18 @@ Aplikasi adalah satu proses Node.js dengan database SQLite berbasis berkas. Plat
 7. Pindah ke domain utama: ubah `SITE_URL` dan Application URL, lalu Restart. Kode tidak perlu diubah.
 
 ## Alur revisi otomatis (GitHub Pull Request -> hosting)
-Setelah disiapkan satu kali, revisi cukup: **buat branch -> Pull Request -> tes CI lulus -> Merge**. Workflow `.github/workflows/deploy.yml` lalu mengunggah file ke hosting dan me-restart aplikasi.
+Revisi: **buat branch -> Pull Request -> tes CI lulus -> Merge**. Workflow `.github/workflows/deploy.yml` lalu menjalankan tes, membuat zip kode, mengunggahnya lewat API DirectAdmin (port 2222), mengekstrak ke folder aplikasi, dan me-restart aplikasi (FTP dan SSH diblokir firewall hosting).
 
 Penyiapan satu kali:
-1. Di DirectAdmin > **FTP Management**, buat akun FTP khusus yang terbatas pada folder aplikasi (`domains/biruwebsite.my.id/app`).
-2. Di GitHub: **Settings > Environments > New environment** bernama `production` (opsional: aktifkan *Required reviewers* sebagai persetujuan akhir). Tambahkan *secrets* di environment itu:
-   | Secret | Isi |
-   |---|---|
-   | `FTP_SERVER` | host FTP dari cPanel (mis. `ftp.biruwebsite.my.id`) |
-   | `FTP_USERNAME` / `FTP_PASSWORD` | akun FTP di atas |
-   | `FTP_APP_DIR` | folder aplikasi, mis. `domains/biruwebsite.my.id/app/` (diakhiri `/`) |
-3. **Settings > Branches**: lindungi `master` (wajib Pull Request dan status check `node` lulus).
+1. DirectAdmin > **Login Keys**: buat key dengan izin hanya `CMD_API_FILE_MANAGER` (tanpa batasan IP, karena IP GitHub berubah).
+2. `gh secret set DA_LOGIN_KEY --env production --repo ptakamendunia-creator/biruwebsite`
+3. Host dan user DirectAdmin diatur di bagian `env:` pada `deploy.yml`.
 
 Catatan:
-- `data/`, `.env`, dan `node_modules/` tidak pernah disentuh oleh deploy, jadi database dan unggahan aman.
-- Bila `package.json` berubah (dependensi baru), buka cPanel > Node.js dan klik **Run NPM Install** satu kali.
-- Rollback: *revert* PR di GitHub, lalu merge; deploy berjalan lagi.
-- Deploy manual: tab **Actions > Deploy > Run workflow**.
+- `data/`, `.env`, dan `node_modules/` tidak pernah disentuh deploy, jadi database dan unggahan aman.
+- Bila `package.json` berubah, klik **Run NPM Install** di DirectAdmin > Node.js satu kali.
+- Rollback: *revert* PR lalu merge. Deploy manual: Actions > Deploy > Run workflow.
+- Login Key bisa menulis ke seluruh akun hosting; simpan hanya sebagai secret GitHub dan putar ulang bila bocor.
 
 ## Build produksi
 Tidak ada langkah build (HTML dirender server, CSS/JS statis):

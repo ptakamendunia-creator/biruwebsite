@@ -1,6 +1,7 @@
 name: Deploy
 # Berjalan otomatis setelah pull request di-merge ke master (atau manual dari tab Actions).
-# Alur: tes -> unggah lewat FTPS ke folder aplikasi cPanel -> restart aplikasi Node.
+# Alur: tes -> zip kode -> unggah lewat API DirectAdmin (port 2222) -> ekstrak ke folder aplikasi -> restart.
+# FTP dan SSH diblokir firewall hosting, jadi dipakai API DirectAdmin (HTTPS).
 on:
   push:
     branches: [master]
@@ -9,6 +10,11 @@ on:
 concurrency:
   group: deploy
   cancel-in-progress: false
+
+env:
+  DA_HOST: rentalmobiljogjakarta.com
+  DA_USER: rentalmo
+  APP_DIR: /domains/biruwebsite.my.id/app
 
 jobs:
   deploy:
@@ -21,42 +27,35 @@ jobs:
       - run: npm ci
       - run: npm test
 
-      - name: Unggah ke hosting (FTPS)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          server-dir: ${{ secrets.FTP_APP_DIR }}
-          # Jangan pernah menimpa/menghapus data, env, dan dependensi di server.
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            node_modules/**
-            data/**
-            deploy/**
-            docs/**
-            .env
-            .env.example
-            *.md
-            *.lnk
-            *.log
-            tmp/**
-            stderr.log
-
-      - name: Restart aplikasi Node (Passenger)
+      - name: Buat paket rilis
         run: |
-          mkdir -p restart/tmp
-          date -u +%s > restart/tmp/restart.txt
-      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./restart/
-          server-dir: ${{ secrets.FTP_APP_DIR }}
-          state-name: .ftp-restart-state.json
-          dangerous-clean-slate: false
+          zip -qr release.zip . \
+            -x ".git/*" ".github/*" "node_modules/*" "data/*" "deploy/*" "docs/*" \
+               ".env" ".env.example" "*.md" "*.lnk" "*.log" "tmp/*" "release.zip"
+          ls -l release.zip
+
+      - name: Unggah dan ekstrak lewat DirectAdmin
+        env:
+          DA_LOGIN_KEY: ${{ secrets.DA_LOGIN_KEY }}
+        run: |
+          set -euo pipefail
+          API="https://$DA_HOST:2222/CMD_API_FILE_MANAGER"
+          call() { curl -fsS --max-time 300 -u "$DA_USER:$DA_LOGIN_KEY" "$@"; }
+          check() { echo "$1"; echo "$1" | grep -q 'error=0' || { echo "::error::DirectAdmin menolak permintaan"; exit 1; }; }
+
+          check "$(call -F action=upload -F path=$APP_DIR -F file1=@release.zip "$API")"
+          check "$(call --data-urlencode action=extract --data-urlencode path=$APP_DIR/release.zip \
+                        --data-urlencode directory=$APP_DIR --data-urlencode page=2 --data-urlencode overwrite=yes "$API")"
+          check "$(call --data-urlencode action=multiple --data-urlencode button=delete --data-urlencode path=$APP_DIR \
+                        --data-urlencode select0=$APP_DIR/release.zip "$API")"
+
+          # Passenger me-restart aplikasi bila waktu modifikasi tmp/restart.txt berubah.
+          date -u +%s > restart.txt
+          check "$(call -F action=upload -F path=$APP_DIR/tmp -F file1=@restart.txt "$API")"
+
+      - name: Cek situs
+        run: |
+          sleep 10
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "https://biruwebsite.my.id/healthz")
+          echo "healthz: $code"
+          [ "$code" = "200" ]
