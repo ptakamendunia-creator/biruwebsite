@@ -1,0 +1,62 @@
+name: Deploy
+# Berjalan otomatis setelah pull request di-merge ke master (atau manual dari tab Actions).
+# Alur: tes -> unggah lewat FTPS ke folder aplikasi cPanel -> restart aplikasi Node.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - run: npm test
+
+      - name: Unggah ke hosting (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ secrets.FTP_APP_DIR }}
+          # Jangan pernah menimpa/menghapus data, env, dan dependensi di server.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            node_modules/**
+            data/**
+            deploy/**
+            docs/**
+            .env
+            .env.example
+            *.md
+            *.lnk
+            *.log
+            tmp/**
+            stderr.log
+
+      - name: Restart aplikasi Node (Passenger)
+        run: |
+          mkdir -p restart/tmp
+          date -u +%s > restart/tmp/restart.txt
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./restart/
+          server-dir: ${{ secrets.FTP_APP_DIR }}
+          state-name: .ftp-restart-state.json
+          dangerous-clean-slate: false

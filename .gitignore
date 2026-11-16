@@ -11,3 +11,9 @@ data/
 data/*.db-shm
 data/*.db-wal
 deploy/
+
+# Lain-lain
+*.lnk
+restart/
+.ftp-deploy-sync-state.json
+.ftp-restart-state.json

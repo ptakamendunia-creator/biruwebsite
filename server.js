@@ -19,6 +19,24 @@ if (config.trustProxy) app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
 
+// URL kanonis (SEO): satu host + https, tanpa trailing slash. 301 hanya untuk GET/HEAD di produksi.
+if (config.isProd) {
+  const canonical = new URL(config.siteUrl);
+  app.use((req, res, next) => {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+    const host = (req.headers.host || '').toLowerCase();
+    const hostWrong = host !== canonical.host.toLowerCase() && host.replace(/^www\./, '') === canonical.host.toLowerCase();
+    // http->https hanya bila proxy menyatakan jelas lewat X-Forwarded-Proto (hindari loop redirect).
+    const insecure = canonical.protocol === 'https:' && String(req.headers['x-forwarded-proto'] || '').split(',')[0].trim() === 'http';
+    const q = req.originalUrl.indexOf('?');
+    const pathname = q === -1 ? req.originalUrl : req.originalUrl.slice(0, q);
+    const search = q === -1 ? '' : req.originalUrl.slice(q);
+    const slash = pathname.length > 1 && pathname.endsWith('/') && !pathname.startsWith('//');
+    if (!hostWrong && !insecure && !slash) return next();
+    res.redirect(301, canonical.origin + (slash ? pathname.replace(/\/+$/, '') : pathname) + search);
+  });
+}
+
 app.use(helmet({
   contentSecurityPolicy: {
     useDefaults: false,

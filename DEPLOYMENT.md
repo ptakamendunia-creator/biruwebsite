@@ -3,11 +3,11 @@
 Aplikasi adalah satu proses Node.js dengan database SQLite berbasis berkas. Platform yang sudah dipakai: **hosting cPanel Gapurahoster (menu Node.js)**. Alternatif: VPS atau hosting lain yang mendukung Node 22.13+.
 
 ## Gapurahoster (cPanel Node.js) — yang sedang dipakai
-1. **Node.js > Create Application**: Node 24, mode `production`, Application root `biru-website`, URL `web.rentalmobiljogjakarta.com` (kolom path kosong), startup file `server.js`.
+1. **Node.js > Create Application**: Node 24, mode `production`, Application root `domains/biruwebsite.my.id/app` (satu folder dengan `public_html` domain), URL `biruwebsite.my.id` (kolom path kosong), startup file `server.js`.
 2. **Environment variables** (satu variabel per baris; `NODE_ENV` otomatis dari mode):
    | Name | Value |
    |---|---|
-   | `SITE_URL` | `https://web.rentalmobiljogjakarta.com` |
+   | `SITE_URL` | `https://biruwebsite.my.id` |
    | `SESSION_SECRET` | acak 64 karakter (`node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`) |
    | `TRUST_PROXY` | `1` |
    | `ADMIN_EMAIL`, `ADMIN_PASSWORD` | hanya untuk membuat admin pertama (min. 10 karakter) |
@@ -16,6 +16,25 @@ Aplikasi adalah satu proses Node.js dengan database SQLite berbasis berkas. Plat
 5. Hapus file placeholder (`index.html`/`index.php`) di folder dokumen subdomain bila halaman bawaan hosting masih muncul.
 6. Log kesalahan: `stderr.log` di folder aplikasi. Penolakan lintas-asal ditulis dengan awalan `[sameOrigin]`.
 7. Pindah ke domain utama: ubah `SITE_URL` dan Application URL, lalu Restart. Kode tidak perlu diubah.
+
+## Alur revisi otomatis (GitHub Pull Request -> hosting)
+Setelah disiapkan satu kali, revisi cukup: **buat branch -> Pull Request -> tes CI lulus -> Merge**. Workflow `.github/workflows/deploy.yml` lalu mengunggah file ke hosting dan me-restart aplikasi.
+
+Penyiapan satu kali:
+1. Di cPanel > **FTP Accounts**, buat akun FTP khusus yang terbatas pada folder aplikasi (`domains/biruwebsite.my.id/app`).
+2. Di GitHub: **Settings > Environments > New environment** bernama `production` (opsional: aktifkan *Required reviewers* sebagai persetujuan akhir). Tambahkan *secrets* di environment itu:
+   | Secret | Isi |
+   |---|---|
+   | `FTP_SERVER` | host FTP dari cPanel (mis. `ftp.biruwebsite.my.id`) |
+   | `FTP_USERNAME` / `FTP_PASSWORD` | akun FTP di atas |
+   | `FTP_APP_DIR` | folder aplikasi, mis. `domains/biruwebsite.my.id/app/` (diakhiri `/`) |
+3. **Settings > Branches**: lindungi `master` (wajib Pull Request dan status check `node` lulus).
+
+Catatan:
+- `data/`, `.env`, dan `node_modules/` tidak pernah disentuh oleh deploy, jadi database dan unggahan aman.
+- Bila `package.json` berubah (dependensi baru), buka cPanel > Node.js dan klik **Run NPM Install** satu kali.
+- Rollback: *revert* PR di GitHub, lalu merge; deploy berjalan lagi.
+- Deploy manual: tab **Actions > Deploy > Run workflow**.
 
 ## Build produksi
 Tidak ada langkah build (HTML dirender server, CSS/JS statis):
@@ -27,7 +46,7 @@ npm run migrate
 ## Variabel lingkungan wajib
 ```
 NODE_ENV=production
-SITE_URL=https://web.rentalmobiljogjakarta.com
+SITE_URL=https://biruwebsite.my.id
 SESSION_SECRET=<32+ karakter acak>
 TRUST_PROXY=1
 ```
@@ -56,7 +75,7 @@ Server menolak start di produksi tanpa `SESSION_SECRET`.
 3. Nginx (terminasi HTTPS lewat certbot):
    ```nginx
    server {
-     server_name web.rentalmobiljogjakarta.com;
+     server_name biruwebsite.my.id;
      client_max_body_size 4m;
      location / {
        proxy_pass http://127.0.0.1:3000;
@@ -66,7 +85,7 @@ Server menolak start di produksi tanpa `SESSION_SECRET`.
      }
    }
    ```
-4. `sudo certbot --nginx -d web.rentalmobiljogjakarta.com`, lalu `sudo systemctl enable --now biru-website`.
+4. `sudo certbot --nginx -d biruwebsite.my.id`, lalu `sudo systemctl enable --now biru-website`.
 5. Cron harian: `0 2 * * * cd /srv/biru-website && /usr/bin/node scripts/backup.js`.
 
 ## Windows / PM2

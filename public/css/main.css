@@ -336,13 +336,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (max-width: 1080px) {
   :root { --header-h: 68px; }
   .nav-toggle { display: inline-flex; }
-  .main-nav { position: fixed; inset: var(--header-h) 0 0 0; background: #fff; flex-direction: column; align-items: stretch; gap: 0; padding: 12px 20px 28px; overflow-y: auto; opacity: 0; transform: translateY(-10px); visibility: hidden; transition: opacity .25s, transform .35s var(--ease), visibility .35s; }
-  .main-nav.open { opacity: 1; transform: none; visibility: visible; }
+  /* backdrop-filter pada header membuat menu fixed terkurung di header (tinggi 68px) -> matikan di mobile */
+  .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; background: #fff; }
+  .main-nav { position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0; height: calc(100vh - var(--header-h)); height: calc(100dvh - var(--header-h)); z-index: 49; white-space: normal; background: #fff; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; padding: 8px 20px calc(28px + env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; font-size: 16px; opacity: 0; transform: translateY(-10px); visibility: hidden; pointer-events: none; transition: opacity .25s, transform .35s var(--ease), visibility .35s; }
+  .main-nav.open { opacity: 1; transform: none; visibility: visible; pointer-events: auto; }
   .main-nav > a:not(.btn), .sub-toggle { padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 16px; width: 100%; justify-content: space-between; }
   .main-nav > a.is-active::after, .sub-toggle.is-active::after { display: none; }
-  .has-sub { width: 100%; } .sub { position: static; box-shadow: none; border: 0; padding: 4px 0 8px 12px; min-width: 0; }
+  .has-sub { width: 100%; } .sub { position: static; box-shadow: none; border: 0; border-bottom: 1px solid var(--line); background: var(--light); border-radius: 12px; margin: 6px 0 8px; padding: 6px; min-width: 0; }
+  .sub a { padding: 13px 14px; font-size: 15px; white-space: normal; }
   .has-sub:hover .sub { display: none; } .has-sub.open .sub { display: block; }
-  .btn-member { margin-top: 20px; }
+  .btn-member { margin-top: 20px; width: 100%; flex: none; }
 }
 @media (max-width: 860px) {
   .section { padding: 56px 0; }

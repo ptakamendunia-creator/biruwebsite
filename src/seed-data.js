@@ -96,7 +96,11 @@ const services = [
     keyword: 'jasa website company profile',
     audience: [['Perusahaan', 'Tampilkan profil, visi, dan layanan secara resmi.'], ['UMKM & Bisnis', 'Bangun kepercayaan sebelum calon pelanggan menghubungi.'], ['Lembaga & Organisasi', 'Sampaikan program dan informasi kepada publik.'], ['Kontraktor & Supplier', 'Tunjukkan pengalaman proyek dan kapabilitas.'], ['Konsultan & Profesional', 'Perkenalkan keahlian dan cara kerja Anda.'], ['Institusi Pendidikan', 'Sajikan program, fasilitas, dan informasi pendaftaran.']],
     feature: [['Struktur halaman jelas', 'Beranda, tentang, layanan, portofolio, dan kontak tersusun rapi.'], ['Responsif', 'Nyaman dibuka di ponsel, tablet, dan desktop.'], ['SEO dasar', 'Judul, deskripsi, sitemap, dan data terstruktur disiapkan.'], ['Domain, hosting, SSL', 'Paket lengkap agar website langsung dapat diakses aman.']],
-    packages: [pk('CP Essential', 'Hubungi kami', 'Untuk bisnis yang membutuhkan profil ringkas.', ['Hingga 5 halaman', 'Desain responsif', 'Form kontak', 'SEO dasar'], false), pk('CP Business', 'Hubungi kami', 'Untuk perusahaan dengan konten lebih lengkap.', ['Hingga 10 halaman', 'Portofolio dan artikel', 'Email bisnis', 'SEO dasar dan sitemap'], true), pk('CP Signature', 'Hubungi kami', 'Untuk kebutuhan tampilan dan fitur lebih khusus.', ['Halaman sesuai kebutuhan', 'Desain eksklusif', 'Integrasi sesuai kebutuhan', 'Pendampingan prioritas'], false)]
+    packages: [
+      pk('CP Essential', 'Rp 1.500.000', 'Untuk bisnis yang membutuhkan profil ringkas dan siap online.', ['5 halaman website', 'Domain .com', 'Hosting 3 GB', '7 email perusahaan', 'Copywriting konten gratis', 'Integrasi WhatsApp', 'Form kontak', 'Desain responsif', 'SEO dasar', 'SSL', 'Optimasi kecepatan website', 'Revisi unlimited', 'Pengerjaan 6 hari', 'Perpanjangan Rp 500.000/tahun'], false),
+      pk('CP Business', 'Rp 2.500.000', 'Untuk perusahaan dengan konten lebih lengkap dan kebutuhan pelacakan.', ['Semua fitur CP Essential', '10 halaman website', '15 email perusahaan', 'Google Analytics 4', 'Google Tag Manager', 'WhatsApp lead tracking', 'Form submission tracking', 'Google Search Console', 'Halaman produk/layanan', 'Integrasi media sosial', 'Struktur CTA berorientasi konversi', 'Dukungan teknis setelah website live', 'Perpanjangan Rp 500.000/tahun'], true),
+      pk('CP Signature', 'Rp 4.000.000', 'Untuk kebutuhan tampilan dan fitur lebih khusus.', ['Semua fitur CP Business', '20 halaman website', '30 email perusahaan', 'Halaman produk/layanan dengan detail', 'Desain lebih custom/premium', 'Integrasi Meta Pixel', 'Google Ads conversion tracking', 'Conversion tracking lebih lengkap', 'Integrasi tambahan', 'Prioritas pengerjaan dan dukungan', 'Perpanjangan Rp 500.000/tahun'], false)
+    ]
   },
   {
     slug: 'landing-page', name: 'Website Landing Page', icon: 'layout',
@@ -110,7 +114,11 @@ const services = [
     keyword: 'jasa landing page',
     audience: [['Produk Baru', 'Perkenalkan produk dengan alur yang meyakinkan.'], ['Jasa Profesional', 'Jelaskan layanan dan ajak calon klien berkonsultasi.'], ['Campaign', 'Halaman khusus untuk promosi dan musim tertentu.'], ['Lead Generation', 'Kumpulkan kontak calon pelanggan melalui form.'], ['Personal Brand', 'Bangun reputasi pribadi atau profesional.'], ['Event & Program', 'Sampaikan jadwal, manfaat, dan pendaftaran.']],
     feature: [['Fokus pada satu CTA', 'Struktur halaman mengarah ke satu tindakan utama.'], ['Form ke WhatsApp/email', 'Pesan masuk langsung ke tim Anda.'], ['Cepat dimuat', 'Aset ringan agar pengunjung tidak menunggu.'], ['Siap diukur', 'Dapat dipasangi analytics sesuai kebutuhan.']],
-    packages: [pk('LP Essential', 'Hubungi kami', 'Satu halaman untuk satu penawaran.', ['1 halaman', 'Desain responsif', 'Tombol WhatsApp'], false), pk('LP Business', 'Hubungi kami', 'Landing page dengan bagian bukti dan form.', ['1 halaman panjang', 'Form tersimpan', 'Penulisan naskah dasar'], true), pk('LP Signature', 'Hubungi kami', 'Untuk kampanye dengan kebutuhan khusus.', ['Desain eksklusif', 'Animasi pilihan', 'Integrasi sesuai kebutuhan'], false)]
+    packages: [
+      pk('LP Essential', 'Rp 500.000', 'Landing page sederhana yang siap dipakai untuk bisnis.', ['1 halaman website', 'Domain .com', 'Hosting 3 GB', '1 email perusahaan', 'Copywriting konten gratis', 'Integrasi WhatsApp', 'Form kontak', 'Desain responsif', 'SEO dasar', 'SSL', 'Optimasi kecepatan website', 'Revisi unlimited', 'Pengerjaan 2 hari', 'Perpanjangan Rp 500.000/tahun'], false),
+      pk('LP Business', 'Rp 1.000.000', 'Landing page lebih lengkap dan siap memantau performa.', ['Semua fitur LP Essential', '3 email perusahaan', 'Google Analytics 4', 'Google Tag Manager', 'WhatsApp lead tracking', 'Form submission tracking', 'Google Search Console', 'Section lebih lengkap', 'Integrasi media sosial', 'Struktur CTA berorientasi konversi', 'Dukungan teknis setelah website live', 'Perpanjangan Rp 500.000/tahun'], true),
+      pk('LP Signature', 'Rp 1.500.000', 'Landing page lebih custom dengan integrasi luas untuk brand.', ['Semua fitur LP Business', '5 email perusahaan', 'Desain lebih custom/premium', 'Integrasi Meta Pixel', 'Google Ads conversion tracking', 'Conversion tracking lebih lengkap', 'Integrasi tambahan', 'Prioritas pengerjaan dan dukungan', 'Perpanjangan Rp 500.000/tahun'], false)
+    ]
   },
   {
     slug: 'toko-online', name: 'Website Toko Online', icon: 'cart',
@@ -125,7 +133,11 @@ const services = [
     audience: [['Brand Fashion', 'Katalog dengan varian ukuran dan warna.'], ['Produk Pertanian', 'Pesanan dengan satuan dan wilayah kirim.'], ['Toko Komunitas', 'Merchandise dan produk digital.'], ['Reseller & Distributor', 'Harga bertingkat dan katalog besar.']],
     feature: [['Produk & checkout', 'Kategori, varian, stok, dan alur pembayaran.'], ['Payment gateway', 'Integrasi pembayaran sesuai penyedia pilihan Anda.'], ['Cek ongkir', 'Perhitungan ongkos kirim dengan penyedia ekspedisi.'], ['Notifikasi order', 'Kabar pesanan baru melalui email atau WhatsApp.'], ['Dashboard pesanan', 'Pantau pesanan dan status pengiriman.'], ['Responsive commerce', 'Nyaman untuk belanja lewat ponsel.']],
     step: [['Produk', 'Pelanggan memilih produk dan varian.'], ['Checkout', 'Mengisi alamat dan memilih ekspedisi.'], ['Pembayaran', 'Membayar melalui metode yang tersedia.'], ['Pemrosesan', 'Tim memproses dan mengemas pesanan.'], ['Pengiriman', 'Nomor resi dikirim ke pelanggan.']],
-    packages: [pk('Commerce Essential', 'Hubungi kami', 'Toko online untuk katalog dan pesanan dasar.', ['Katalog produk', 'Keranjang dan checkout', 'Dashboard pesanan'], false), pk('Commerce Automation', 'Hubungi kami', 'Toko dengan pembayaran dan ongkir terintegrasi.', ['Semua fitur Essential', 'Payment gateway', 'Cek ongkir', 'Notifikasi order'], true), pk('Commerce Signature', 'Hubungi kami', 'Sistem penjualan dengan alur khusus.', ['Fitur sesuai kebutuhan', 'Integrasi pihak ketiga', 'Desain eksklusif'], false)]
+    packages: [
+      pk('Commerce Essential', 'Rp 2.500.000', 'Untuk bisnis yang ingin mulai berjualan online dengan sistem transaksi lengkap.', ['Produk unlimited', 'Domain .com, .id, atau .co.id', 'Hosting 3 GB', 'Revisi unlimited', 'Keranjang dan checkout online', 'Payment gateway QRIS dan Virtual Account', 'Cek ongkir otomatis via RajaOngkir', 'Notifikasi order', '10 email perusahaan', 'Dashboard pengelolaan pesanan', 'Responsive, SEO dasar, dan SSL', 'Pengerjaan sekitar 6 hari', 'Perpanjangan Rp 500.000/tahun'], false),
+      pk('Commerce Automation', 'Rp 5.000.000', 'Untuk toko online yang ingin mengurangi pekerjaan manual pada order dan pengiriman.', ['Semua fitur Commerce Essential', 'Pembuatan resi otomatis', 'Pickup kurir otomatis', 'Tracking pengiriman', 'Cetak label pengiriman', 'Status pesanan lebih terstruktur', '20 email perusahaan', 'Google Analytics', 'Google Search Console', 'Integrasi Meta Pixel', 'Prioritas dukungan', 'Perpanjangan Rp 500.000/tahun'], true),
+      pk('Commerce Signature', 'Rp 7.500.000', 'Untuk bisnis yang butuh toko online sekaligus sistem akun pelanggan lengkap.', ['Semua fitur Commerce Automation', 'Login dan registrasi member', 'Dashboard member', 'Riwayat dan detail pesanan', 'Status pesanan untuk member', 'Profil dan alamat pengiriman tersimpan', 'Manajemen data pelanggan', '30 email perusahaan', 'Desain lebih custom/premium', 'Integrasi tambahan', 'Prioritas pengerjaan dan dukungan', 'Perpanjangan Rp 500.000/tahun'], false)
+    ]
   },
   {
     slug: 'website-custom', name: 'Website Custom', icon: 'puzzle',
@@ -154,7 +166,11 @@ const services = [
     keyword: 'jasa website portal berita',
     audience: [['Media Lokal', 'Berita daerah dengan rubrik tetap.'], ['Organisasi', 'Siaran pers dan kabar kegiatan.']],
     feature: [['Dashboard admin', 'Tulis, atur, dan jadwalkan artikel.'], ['Berita unlimited', 'Tidak dibatasi jumlah artikel.'], ['Kategori & tag', 'Susun konten agar mudah dijelajahi.'], ['Multi author', 'Beberapa penulis dengan peran berbeda.'], ['Pencarian & related', 'Temukan dan rekomendasikan artikel.'], ['SEO & social preview', 'Metadata siap dibagikan.']],
-    packages: [pk('News Essential', 'Hubungi kami', 'Portal berita sederhana.', ['Artikel dan kategori', 'Dashboard admin'], false), pk('News Business', 'Hubungi kami', 'Portal dengan banyak penulis.', ['Multi author', 'Tag dan pencarian', 'Slot iklan'], true), pk('News Signature', 'Hubungi kami', 'Portal dengan alur redaksi khusus.', ['Workflow redaksi', 'Integrasi sesuai kebutuhan'], false)]
+    packages: [
+      pk('News Essential', 'Rp 1.000.000', 'Fondasi publikasi portal berita yang profesional dan mudah dikelola.', ['Artikel unlimited', 'Kategori berita', 'Dashboard admin', 'Halaman detail berita', 'Pencarian dan berita terkait', 'Share ke media sosial', 'Domain .com', 'Hosting 3 GB', '5 email perusahaan', 'Responsive, SEO dasar, dan SSL', 'Revisi unlimited', 'Perpanjangan Rp 500.000/tahun'], false),
+      pk('News Business', 'Rp 2.000.000', 'Untuk media dengan beberapa penulis dan fitur publikasi lebih lengkap.', ['Semua fitur News Essential', 'Multi author', 'Peran Admin, Editor, dan Writer', 'Berita breaking, trending, dan featured', 'Tag dan jadwal publikasi', 'Draft artikel dan halaman penulis', '15 email perusahaan', 'Google Analytics dan Search Console', 'Slot banner iklan', 'Optimasi struktur SEO berita', 'Perpanjangan Rp 500.000/tahun'], true),
+      pk('News Signature', 'Rp 3.000.000', 'Untuk perusahaan media yang butuh alur redaksi penuh dan monetisasi.', ['Semua fitur News Business', 'Workflow redaksi (Draft, Review, Approval, Publish)', 'Manajemen tim redaksi', 'Peran Reporter, Editor, dan Administrator', 'Manajemen banner iklan', 'Statistik konten dan newsletter', '30 email perusahaan', 'Desain lebih custom/premium', 'Integrasi tambahan', 'Prioritas pengerjaan dan dukungan', 'Perpanjangan Rp 500.000/tahun'], false)
+    ]
   },
   {
     slug: 'web-application', name: 'Web Application', icon: 'dashboard',
@@ -203,14 +219,68 @@ const services = [
 ];
 
 const portfolio = [
-  ['Contoh Landing Page Showroom', 'Landing Page', 'Otomotif', 'blue', '', '/img/portfolio/1.svg'],
-  ['Contoh Toko Online Fashion', 'Toko Online', 'Fashion', 'sand', '', '/img/portfolio/2.svg'],
-  ['Contoh Toko Online Pertanian', 'Toko Online', 'Pertanian', 'sky', '', '/img/portfolio/3.svg'],
-  ['Contoh Company Profile Logistik', 'Company Profile', 'Logistik', 'blue', '', '/img/portfolio/4.svg'],
-  ['Contoh Company Profile Konstruksi', 'Company Profile', 'Konstruksi', 'sky', '', '/img/portfolio/5.svg'],
-  ['Contoh Website Komunitas', 'Company Profile', 'Komunitas', 'sand', '', '/img/portfolio/6.svg'],
-  ['Contoh Landing Page Layanan Laundry', 'Landing Page', 'Jasa', 'sky', '', '/img/portfolio/7.svg'],
-  ['Contoh Website Pendidikan', 'Company Profile', 'Pendidikan', 'blue', '', '/img/portfolio/8.svg']
+  ["Chaubok Nousa", "Landing Page", "Makanan", "blue", "", "/uploads/portfolio/4d8cda67-4c3e-4924-b932-5fe7e8a0bb74.webp"],
+  ["Agro Global Nusantara", "Landing Page", "Export", "sky", "", "/uploads/portfolio/0db029af-878b-4423-90ec-90f21c4a354a.webp"],
+  ["Arini Bali Pool", "Landing Page", "Service pool", "sand", "", "/uploads/portfolio/5a760ce9-7388-421e-a6c0-2f3b312b2c81.webp"],
+  ["Arta Putra Nugraha", "Landing Page", "Furniture", "blue", "", "/uploads/portfolio/50b3aed9-a247-44ef-9985-f14c4176cea0.webp"],
+  ["AyoKembali", "Landing Page", "Wisata", "sky", "", "/uploads/portfolio/e1e46a58-20cd-4f61-97ac-730616e1a118.webp"],
+  ["Bos Laundry", "Landing Page", "Laundry", "sand", "", "/uploads/portfolio/d032df96-318b-45c6-be00-80ea509e47ae.webp"],
+  ["Chaubok Kpk", "Landing Page", "Kuliner", "blue", "", "/uploads/portfolio/a767751f-c833-4b5c-bf3a-43d488ea1aad.webp"],
+  ["Choeru Essential", "Landing Page", "Minyak kemiri", "sky", "", "/uploads/portfolio/f4d25af2-b313-4980-b988-4015e6329b10.webp"],
+  ["LSP Cipta Sarana Education", "Landing Page", "Edukasi", "sand", "", "/uploads/portfolio/8cda73ac-2830-4b9b-aac4-69d59ae9bd8d.webp"],
+  ["Cuanki Ajah", "Landing Page", "Kuliner", "blue", "", "/uploads/portfolio/2c2027c2-52d4-452c-a4f1-35d7396a7f3b.webp"],
+  ["Duta Panghegar Interior", "Landing Page", "Interior", "sky", "", "/uploads/portfolio/9860e32e-1858-4248-a407-d0fda7c03faf.webp"],
+  ["Pengacara Dan Konsultan", "Landing Page", "Advokat", "sand", "", "/uploads/portfolio/2e4d4068-b364-4657-98f2-cffb6b07a1a0.webp"],
+  ["Gavin Global", "Landing Page", "Ekspor Pertanian", "blue", "", "/uploads/portfolio/70a259db-71a8-42c0-8085-bc99bfd26fae.webp"],
+  ["Griya Jagad Asyif", "Landing Page", "Kesehatan", "sky", "", "/uploads/portfolio/11b1732c-c1e3-48cc-9033-527002a28687.webp"],
+  ["Indosat HiFi Fiber", "Landing Page", "Internet", "sand", "", "/uploads/portfolio/c342a1c0-e300-499b-bf3c-ce46e4e13af1.webp"],
+  ["Indosat Hifi", "Landing Page", "Internet", "blue", "", "/uploads/portfolio/6115afc4-bf0e-4c16-bc5b-3271273f8611.webp"],
+  ["KB Samsat Bojonegoro", "Landing Page", "Layanan pajak kendaraan", "sky", "", "/uploads/portfolio/dcaec9e0-d7d5-44d9-af39-1445575e8573.webp"],
+  ["Kementerian Haji dan Umrah", "Landing Page", "Travel Haji dan Umrah", "sand", "", "/uploads/portfolio/e5bf41f3-dbf9-4087-8399-bea5e981bce7.webp"],
+  ["Klinik Materna", "Landing Page", "Kesehatan", "blue", "", "/uploads/portfolio/f86b2b19-e5cb-4f98-8e30-273dbdaa7aa8.webp"],
+  ["ASCO Lepas", "Landing Page", "Otomotif", "sky", "", "/uploads/portfolio/27e20881-6940-4f87-a289-92845bfa551f.webp"],
+  ["Livaya Impact", "Landing Page", "Lembaga pelatihan", "sand", "", "/uploads/portfolio/70e74f21-84d1-4761-a725-baa49608c1df.webp"],
+  ["LSP Sinar Mandiri Education", "Landing Page", "Manajemen", "blue", "", "/uploads/portfolio/6f9dc1f9-e63b-48ab-90f8-b5f7b67a9a63.webp"],
+  ["Marhumi Abadi", "Landing Page", "Travel", "sky", "", "/uploads/portfolio/2c22028d-331a-4166-8671-21e3bbbb78bf.webp"],
+  ["PT Naya Global Group", "Landing Page", "Konstruksi", "sand", "", "/uploads/portfolio/f9a4b746-eb6d-49e1-ad74-47071dece0d5.webp"],
+  ["PT Pacific General Services", "Landing Page", "Rental kendaraan tambang", "blue", "", "/uploads/portfolio/b6ac1455-38b6-4119-adef-a80380decdf2.webp"],
+  ["PT Asuransi Jiwa Manulife", "Landing Page", "Asuransi", "sky", "", "/uploads/portfolio/f5f358c8-34fa-41ef-8b22-da9643d2cedb.webp"],
+  ["Pradnya Denbukit Edukasi", "Landing Page", "Penerbitan", "sand", "", "/uploads/portfolio/5a24199a-fceb-4ad1-9f99-f0d47134f902.webp"],
+  ["Purple Spa", "Landing Page", "Kesehatan", "blue", "", "/uploads/portfolio/66b927a9-5029-463e-a047-152b43a6c058.webp"],
+  ["PT Rekacipta Konstruksi", "Landing Page", "Konstruksi", "sky", "", "/uploads/portfolio/2cf08aa4-7592-4bab-a11e-8307e475d612.webp"],
+  ["PT Thuba Medika Kencana", "Landing Page", "Alat kesehatan", "sand", "", "/uploads/portfolio/0494faa3-cd8f-437d-9da6-acff1963d29a.webp"],
+  ["Rental & Private Transport", "Landing Page", "Rental", "blue", "", "/uploads/portfolio/8bf1b55a-bb57-4f21-8f78-d7a1b75d07ea.webp"],
+  ["SPPG", "Landing Page", "Makanan", "sky", "", "/uploads/portfolio/ded090b3-a3f9-49e8-9608-9332655321c0.webp"],
+  ["Sukma Pyrous", "Landing Page", "Motivator", "sand", "", "/uploads/portfolio/23c2a4d1-a05a-43a3-8c66-ab67b0288731.webp"],
+  ["Titik Dingin Solusi", "Landing Page", "Service", "blue", "", "/uploads/portfolio/efc512a3-a06a-41bb-9e2a-81543741f1f0.webp"],
+  ["Wanstore", "Landing Page", "Top up game", "sky", "", "/uploads/portfolio/3e6fd0df-8f0e-423d-a0ee-98a7a39f39ed.webp"],
+  ["Yasanta", "Landing Page", "Konsultasi Bisnis", "sand", "", "/uploads/portfolio/de578aa3-59a4-4907-91fe-26106bcc6e8e.webp"],
+  ["Toyota Cibubur", "Landing Page", "Otomotif", "blue", "", "/uploads/portfolio/fd410dbd-4b82-40b5-9395-6089c7440b5b.webp"],
+  ["Yayasan Abdurrahman Alfatih", "Company Profile", "Yayasan", "sky", "", "/uploads/portfolio/eca9e20c-a786-41bd-a8ce-9a4572ae39ce.webp"],
+  ["PT Akasta Cargo", "Company Profile", "Cargo", "sand", "", "/uploads/portfolio/9387ee07-b676-41ae-920b-a9b16406d1fd.webp"],
+  ["PT Akbars Shipbuilding", "Company Profile", "Engineering", "blue", "", "/uploads/portfolio/10e00729-2d40-4ab4-b8a5-434673d4e5f3.webp"],
+  ["Being SmartEdu", "Company Profile", "Edukasi", "sky", "", "/uploads/portfolio/06e9455c-64dd-4049-ac36-f47230b8a5f1.webp"],
+  ["BANA & Co.", "Company Profile", "Advokat", "sand", "", "/uploads/portfolio/28dfb78f-31bb-4a98-ba8f-60617cfff043.webp"],
+  ["BYD", "Company Profile", "Otomotif", "blue", "", "/uploads/portfolio/ff2fdf1f-a41f-49bb-b933-65ab602ec7b3.webp"],
+  ["Create Media", "Company Profile", "Out-of-Home advertising", "sky", "", "/uploads/portfolio/7a11ea75-df08-4af0-8e50-1a2b7cbb5a72.webp"],
+  ["Geely", "Company Profile", "Otomotif", "sand", "", "/uploads/portfolio/93c8a9a5-441c-4065-a9bb-ffcc92a4c567.webp"],
+  ["Damitech Mekanika Indonesia", "Company Profile", "Mekanikal", "blue", "", "/uploads/portfolio/a0cc86bb-6024-42ae-a451-4b7a8903276b.webp"],
+  ["KiranaEdu", "Company Profile", "Publikasi", "sky", "", "/uploads/portfolio/bd66854e-0f9a-4516-a6ba-1925cf44d9d0.webp"],
+  ["Kouta Lombok Transfers", "Company Profile", "Travel internasional", "sand", "", "/uploads/portfolio/fa2f4a25-cb1c-46df-ad7d-6cf30778beec.webp"],
+  ["Lombok Tours Home", "Company Profile", "Wisata", "blue", "", "/uploads/portfolio/fe39c313-51f8-4f6d-bd93-7872fc14daf7.webp"],
+  ["Luthfi Logam", "Company Profile", "Kerajinan tembaga dan kuningan", "sky", "", "/uploads/portfolio/334b5136-06a2-411b-8359-1988ecb39d0b.webp"],
+  ["CV. Mitra Setia Kita", "Company Profile", "Penerbitan buku", "sand", "", "/uploads/portfolio/1f2d8291-036c-4ace-8345-2c679fb63931.webp"],
+  ["Visit Raja Ampat", "Company Profile", "Wisata", "blue", "", "/uploads/portfolio/df5c3c87-fe20-45c9-9c72-d1c713340207.webp"],
+  ["Visit Jepang", "Company Profile", "Travel", "sky", "", "/uploads/portfolio/d7b8c55d-c9c7-4b97-9adb-65c8ecb250bd.webp"],
+  ["Young Speaker Club", "Company Profile", "Komunitas public speaking", "sand", "", "/uploads/portfolio/92419315-1f5a-45b9-92cc-af98f045ea5e.webp"],
+  ["Dominique Luxury", "Toko Online", "Fashion", "blue", "", "/uploads/portfolio/737a5b5a-a218-4555-a3a5-76db7bc8c070.webp"],
+  ["ANSA Skinhealth", "Toko Online", "Kosmetik", "sky", "", "/uploads/portfolio/ad257851-4742-4177-b833-96738d86b22c.webp"],
+  ["Gudang Bmb", "Toko Online", "Fashion", "sand", "", "/uploads/portfolio/ef9ebb71-5ea1-4d68-9f80-bdf73f3f0206.webp"],
+  ["Jakarta Football Admirer", "Toko Online", "Fashion", "blue", "", "/uploads/portfolio/353e8ba5-a403-445e-abfd-da82a711aa0d.webp"],
+  ["Madam Donna", "Toko Online", "Spiritual", "sky", "", "/uploads/portfolio/facf296c-5d6e-4489-b381-e93cf3df7a67.webp"],
+  ["The Overheard Post", "Toko Online", "Fashion", "sand", "", "/uploads/portfolio/2a04f9d8-c3ad-48c1-a17b-f55bb4a8bfba.webp"],
+  ["Ichalans Berkah Utama", "Toko Online", "Pertanian", "blue", "", "/uploads/portfolio/dd1af265-527a-4b52-9ef7-c51275bfbd4b.webp"],
+  ["Elsvin Shop", "Toko Online", "Fashion", "sky", "", "/uploads/portfolio/7db83586-d118-4849-8d7e-2cb45e16be4e.webp"]
 ];
 
 const faqs = [
